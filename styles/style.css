@@ -47,3 +47,7 @@ img {
   color: red;
   text-decoration: line-through solid black 2px;
 }
+
+footer {
+  margin-top: 10px;
+}
