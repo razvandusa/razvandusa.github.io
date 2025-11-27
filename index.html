@@ -19,70 +19,122 @@
   </head>
   <body>
     <header>
-      <h1>Heading</h1>
+      <nav>
+        <a id="nav_link" href="#my_name">Home</a>
+        <a id="nav_link" href="#about_me">About</a>
+        <a id="nav_link" href="#my_work">Portofolio</a>
+        <a id="nav_link" href="#contact">Contact</a>
+      </nav>
+      <h1 id="my_name">Razvan Dusa</h1>
     </header>
 
-    <nav>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Projects</a></li>
-        <li><button>Change user</button></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </nav>
-
-    <aside>
-      <p>
-        In this webpage <br />
-        <a href="index.html#About_Me">About me</a> <br />
-        <a href="index.html#My_projects">My projects</a> <br />
-      </p>
-    </aside>
-
     <main>
-      <img src="images/skin.png" alt="Skin Image" />
       <section>
-        <h2 id="About_Me">About Me</h2>
-        <p>
-          Hello there! I’m Razvan Dușa, a passionate Computer Science student at
-          Babeș-Bolyai University (UBB Cluj).
+        <h2 id="about_me">About Me</h2>
+        <p id="about_me_description">
+          Hello! I am Razvan Dușa, a passionate Computer Science student at
+          Babes-Bolyai University, with a passion for technology and coding.
+        </p>
+        <p id="about_me_description">
+          I graduated from Colegiul National Octavian Goga High School with a
+          GPA 3.8/4.0. In the Baccalaureate exam, I scored 9.85/10 in Computer
+          Science.
+        </p>
+        <p id="about_me_description">
+          If you want to learn more about me, feel free to reach out!
         </p>
       </section>
 
       <section>
-        <h2 id="My_projects">My Projects:</h2>
-        <p>
-          I mainly work with <b>C++</b>, <b>Python</b>, <b>Java</b>, but I also
-          enjoy experimenting with <b>HTML</b>, <b>CSS</b>,
-          <b>JavaScript</b> and <b>SQL</b> for more complex systems.
-        </p>
+        <section id="my_work">
+          <h2 id="my_work_title">My Work:</h2>
+          <p id="my_work_description">
+            Below, you will find some of my projects which are available for
+            viewing on GitHub.
+          </p>
+          <figure id="discipline_manager">
+            <a href="https://github.com/razvandusa/DisciplineManager">
+              <img
+                id="my_work_image"
+                src="images/DisciplineManager.png"
+                width="200"
+                height="200"
+                alt="Discipline Manager Project"
+              />
+            </a>
+            <figcaption>
+              <strong
+                ><a
+                  id="my_work_link"
+                  href="https://github.com/razvandusa/DisciplineManager"
+                  >Discipline-Manager</a
+                ></strong
+              >
+              <p id="my_work_project_description">
+                A C++ academic management tool for tracking disciplines, grades,
+                and performance.
+              </p>
+            </figcaption>
+          </figure>
 
-        <dl>
-          <dt>
-            <strong>Discipline-Manager</strong>
-          </dt>
-          <dd>
-            A C++ academic management tool for tracking disciplines, grades, and
-            performance.
-          </dd>
-          <dt>
-            <strong>My-E-Shopping-Website</strong>
-          </dt>
-          <dd>
-            A responsive online store built with HTML, CSS, and JavaScript.
-          </dd>
-        </dl>
+          <figure id="my_e_shopping_website">
+            <a
+              href="https://github.com/razvandusa/High-school-graduation-project"
+            >
+              <img
+                id="my_work_image"
+                src="images/MyECommerceWebsite.png"
+                width="200"
+                height="200"
+                alt="Discipline Manager Project"
+              />
+            </a>
+            <figcaption>
+              <strong
+                ><a
+                  id="my_work_link"
+                  href="https://github.com/razvandusa/High-school-graduation-project"
+                  >My-E-Shopping-Website</a
+                ></strong
+              >
+              <p id="my_work_project_description">
+                A responsive online store built with HTML, CSS, and JavaScript.
+              </p>
+            </figcaption>
+          </figure>
+        </section>
+      </section>
+
+      <section id="contact">
+        <h2 id="contact_title">Let's Connect!</h2>
+        <p id="contact_paragraph">Input your contact details below:</p>
+        <form id="contact_form" action="./submit_page" method="get">
+          <h2 id="contact_form_title">Ready to Get Started?</h2>
+          <p>
+            <label id="contact_form_paragraph" for="name">Your name</label>
+            <input type="text" name="name" id="name" required />
+          </p>
+          <p>
+            <label id="contact_form_paragraph" for="email"
+              >Your email address</label
+            >
+            <input type="email" name="email" id="email" required />
+          </p>
+          <p>
+            <label id="contact_form_paragraph" for="message"
+              >Write your message...</label
+            >
+            <textarea id="message" name="message" rows="5" cols="33"></textarea>
+          </p>
+          <p>
+            <button id="send_message_button">Send Message</button>
+          </p>
+        </form>
       </section>
     </main>
 
     <footer>
-      <address>
-        © 2025 Razvan Dusa. All rights reserved. <br />
-        Contact: razvandusa0608@gmail.com <br />
-        Location: Cluj-Napoca, Romania <br />
-        <a href="https://github.com/razvandusa">GitHub</a> |
-        <a href="www.linkedin.com/in/razvan-dusa-7bb380334">LinkedIn</a>
-      </address>
+      <address>© 2025 Razvan Dusa. All rights reserved. <br /></address>
     </footer>
   </body>
 </html>
