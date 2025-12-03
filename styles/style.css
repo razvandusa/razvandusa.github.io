@@ -1,30 +1,72 @@
+@media (width >= 660px) {
+  nav {
+    width: 650px;
+    margin: 0 auto;
+  }
+}
+
 nav {
   padding-top: 9px;
   padding-bottom: 9px;
-  background-color: #242a38;
+  background: linear-gradient(to right, #323845, #191c23);
+  border-radius: 45px;
   text-align: center;
-  margin-left: 330px;
-  margin-right: 330px;
-}
-
-#nav_link {
-  color: white;
-}
-
-#nav_link:hover {
-  color: rgb(15, 148, 215);
-}
-
-address {
-  color: rgb(200, 200, 200);
-}
-
-#my_work_project_description {
-  color: rgb(200, 200, 200);
+  margin-top: 15px;
 }
 
 body {
-  background-color: #1e1e1e;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+header {
+  background-image: url("../images/header.png");
+  background-size: cover;
+  background-position: center;
+  height: 600px;
+}
+
+.nav_link a {
+  color: white;
+  padding-left: 50px;
+  padding-right: 50px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav_link a:hover {
+  color: rgb(15, 148, 215);
+}
+
+.contact_intro,
+.my_work_description,
+.contact_form_label,
+.contact_form_paragraph,
+.about_me_description,
+address {
+  color: rgb(200, 200, 200);
+  text-align: center;
+}
+
+#about_me:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+#about_me {
+  transition: transform 0.2s ease;
+}
+
+body {
+  font-family: Space Grotesk, sans-serif;
+  background-color: #272626;
+  background-image: linear-gradient(
+      to right,
+      rgba(78, 78, 78, 0.079) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(54, 52, 52, 0.15) 1px, transparent 1px);
+  background-size: 20px 20px;
   font-size: 17px;
 }
 
@@ -36,98 +78,152 @@ body {
   font-size: 100px;
 }
 
-#about_me {
+#about_me h2 {
+  font-size: 40px;
   margin-top: 80px;
-  color: rgb(15, 148, 215);
+  background: linear-gradient(to right, #15bdfc, #86dfff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   text-align: center;
   font-weight: bold;
 }
 
 #my_work {
   margin-top: 80px;
-  background-color: #323336;
+  background: linear-gradient(to right, #383b3f, #4f4f4f);
   text-align: center;
   margin-left: 5px;
   margin-right: 5px;
+  border-radius: 15px;
+  margin-left: 30px;
+  margin-right: 30px;
+  padding-top: 1px;
 }
 
-#my_work_link {
+.github_link {
   color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-#my_work_link:hover {
+.github_link:hover {
   color: rgb(15, 148, 215);
 }
 
-#my_work_title {
-  color: #6f39e2;
+#my_work h2 {
+  background: linear-gradient(to right, #523fff, #756892);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-#my_work_description {
-  color: rgb(200, 200, 200);
-}
-
-#contact_title {
-  color: white;
-  text-align: center;
-}
-
-#discipline_manager {
+figure {
+  width: 340px;
   padding-top: 10px;
   padding-bottom: 1px;
-  background-color: #242a38;
+  background: linear-gradient(to right, #323845, #1e2535);
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: -10px;
+  margin-top: -10px;
+  padding-top: 0px;
+  border-radius: 15px;
 }
 
-#my_e_shopping_website {
-  padding-top: 10px;
-  padding-bottom: 1px;
-  background-color: #242a38;
+figcaption p {
+  text-align: left;
+  padding-left: 10px;
+}
+
+figcaption a {
+  padding-left: 10px;
 }
 
 #contact {
-  background-color: #242a38;
+  background: linear-gradient(to bottom, #1e2535, #161b26);
   padding-top: 2px;
+  padding-bottom: 30px;
   margin-top: 80px;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-left: 30px;
+  margin-right: 30px;
+  border-radius: 500px;
 }
 
 #contact_form {
-  background-color: rgb(16, 15, 24);
-  padding-top: 2px;
-  padding-left: 20px;
-  padding-bottom: 1px;
-  margin-left: 10px;
-  margin-right: 10px;
+  background-color: rgb(22, 20, 34);
+  padding: 20px 60px 3px 40px;
+  margin: 20px auto;
+  max-width: 600px;
+  border-radius: 15px;
+  max-width: 30%;
 }
 
-#contact_form_title {
+#contact h1 {
+  font-size: 40px;
   color: white;
   text-align: center;
 }
 
-#contact_paragraph {
-  color: rgb(200, 200, 200);
-  text-align: center;
-}
-
-#contact_form_paragraph {
-  color: rgb(200, 200, 200);
-  text-align: center;
-}
-
-#about_me_description {
-  color: rgb(200, 200, 200);
-  text-align: center;
-}
-
-#send_message_button {
+#contact_form h2 {
+  font-size: 20px;
   color: white;
-  background-color: #6f39e2;
-  font-size: 18px;
+  text-align: left;
+}
+
+figcaption {
+  text-align: left;
+}
+
+.project_description {
+  color: rgb(200, 200, 200);
+  text-align: left;
+}
+
+.project-content {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-bottom: 20px;
+}
+
+figure img {
+  width: 340px;
+  height: 280px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
 
 address {
+  margin-top: 80px;
   text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  color: white;
   padding: 20px;
+  background: linear-gradient(to right, #323845, #1e2535);
+}
+
+#contact_form input,
+#contact_form textarea {
+  width: 100%;
+  padding: 10px 0 10px 10px;
+  border: 0.4px solid #454953;
+  border-radius: 5px;
+  background-color: #323845;
+  color: white;
+}
+
+#message {
+  resize: vertical;
+  width: 100%;
+  max-width: 100%;
+}
+
+#send_message_button {
+  background: linear-gradient(to right, #2db5e7, #6f39e2);
+  width: 103%;
+  border: none;
+  color: white;
+  padding: 20px 0 20px 0;
+  border-radius: 5px;
+  cursor: pointer;
 }

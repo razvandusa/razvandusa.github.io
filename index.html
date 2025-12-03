@@ -7,55 +7,52 @@
       name="description"
       content="This is a webpage about myself where you can explore the projects I have worked on."
     />
-    <title>My Web Page</title>
+    <title>razvandusa</title>
     <link href="styles/style.css" rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <script async src="scripts/main.js"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Syriac+Western:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-      rel="stylesheet"
-    />
   </head>
+
   <body>
     <header>
       <nav>
-        <a id="nav_link" href="#my_name">Home</a>
-        <a id="nav_link" href="#about_me">About</a>
-        <a id="nav_link" href="#my_work">Portofolio</a>
-        <a id="nav_link" href="#contact">Contact</a>
+        <div class="nav_link">
+          <a href="#my_name">Home</a>
+          <a href="#about_me">About</a>
+          <a href="#my_work">Portofolio</a>
+          <a href="#contact">Contact</a>
+        </div>
       </nav>
       <h1 id="my_name">Razvan Dusa</h1>
     </header>
 
     <main>
-      <section>
-        <h2 id="about_me">About Me</h2>
-        <p id="about_me_description">
-          Hello! I am Razvan Dușa, a passionate Computer Science student at
-          Babes-Bolyai University, with a passion for technology and coding.
-        </p>
-        <p id="about_me_description">
-          I graduated from Colegiul National Octavian Goga High School with a
-          GPA 3.8/4.0. In the Baccalaureate exam, I scored 9.85/10 in Computer
-          Science.
-        </p>
-        <p id="about_me_description">
-          If you want to learn more about me, feel free to reach out!
-        </p>
+      <section id="about_me">
+        <h2>About Me</h2>
+        <div class="about_me_description">
+          <p>
+            Hello! I am Razvan Dușa, a passionate Computer Science student at
+            Babes-Bolyai University, with a passion for technology and coding.
+            <br />
+            <br />
+            I graduated from Colegiul National Octavian Goga High School with a
+            GPA 3.8/4.0. In the Baccalaureate exam, I scored 9.85/10 in Computer
+            Science.
+            <br />
+            <br />
+            If you want to learn more about me, feel free to reach out!
+          </p>
+        </div>
       </section>
 
-      <section>
-        <section id="my_work">
-          <h2 id="my_work_title">My Work:</h2>
-          <p id="my_work_description">
-            Below, you will find some of my projects which are available for
-            viewing on GitHub.
-          </p>
+      <section id="my_work">
+        <h2>My Work</h2>
+        <p class="my_work_description">
+          Below, you will find some of my projects which are available for
+          viewing on GitHub.
+        </p>
+        <div class="project-content">
           <figure id="discipline_manager">
             <a href="https://github.com/razvandusa/DisciplineManager">
               <img
-                id="my_work_image"
                 src="images/DisciplineManager.png"
                 width="200"
                 height="200"
@@ -65,12 +62,12 @@
             <figcaption>
               <strong
                 ><a
-                  id="my_work_link"
+                  class="github_link"
                   href="https://github.com/razvandusa/DisciplineManager"
                   >Discipline-Manager</a
                 ></strong
               >
-              <p id="my_work_project_description">
+              <p class="project_description">
                 A C++ academic management tool for tracking disciplines, grades,
                 and performance.
               </p>
@@ -82,7 +79,6 @@
               href="https://github.com/razvandusa/High-school-graduation-project"
             >
               <img
-                id="my_work_image"
                 src="images/MyECommerceWebsite.png"
                 width="200"
                 height="200"
@@ -92,44 +88,57 @@
             <figcaption>
               <strong
                 ><a
-                  id="my_work_link"
+                  class="github_link"
                   href="https://github.com/razvandusa/High-school-graduation-project"
                   >My-E-Shopping-Website</a
                 ></strong
               >
-              <p id="my_work_project_description">
+              <p class="project_description">
                 A responsive online store built with HTML, CSS, and JavaScript.
               </p>
             </figcaption>
           </figure>
-        </section>
+        </div>
+        <br />
       </section>
 
       <section id="contact">
-        <h2 id="contact_title">Let's Connect!</h2>
-        <p id="contact_paragraph">Input your contact details below:</p>
+        <h1>Let's Connect!</h1>
+        <p class="contact_intro">Input your contact details below:</p>
         <form id="contact_form" action="./submit_page" method="get">
-          <h2 id="contact_form_title">Ready to Get Started?</h2>
+          <h2>Ready to Get Started?</h2>
           <p>
-            <label id="contact_form_paragraph" for="name">Your name</label>
-            <input type="text" name="name" id="name" required />
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Your name"
+              required
+            />
           </p>
           <p>
-            <label id="contact_form_paragraph" for="email"
-              >Your email address</label
-            >
-            <input type="email" name="email" id="email" required />
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Your email address"
+              required
+            />
           </p>
           <p>
-            <label id="contact_form_paragraph" for="message"
-              >Write your message...</label
-            >
-            <textarea id="message" name="message" rows="5" cols="33"></textarea>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              cols="33"
+              placeholder="Write your message..."
+            ></textarea>
           </p>
           <p>
             <button id="send_message_button">Send Message</button>
           </p>
         </form>
+        <br />
       </section>
     </main>
 
