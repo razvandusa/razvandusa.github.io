@@ -247,7 +247,7 @@ address {
   }
 }
 
-@media (width < 482px) {
+@media (width <= 482px) {
   #contact_info {
     flex-direction: column;
   }
