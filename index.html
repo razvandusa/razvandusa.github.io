@@ -53,7 +53,7 @@
           <figure id="discipline_manager">
             <a href="https://github.com/razvandusa/DisciplineManager">
               <img
-                id ="discipline_manager_image"
+                id="discipline_manager_image"
                 src="images/DisciplineManager.png"
                 width="200"
                 height="200"
@@ -107,39 +107,86 @@
       <section id="contact">
         <h1>Let's Connect!</h1>
         <p class="contact_intro">Input your contact details below:</p>
-        <form id="contact_form" action="./submit_page" method="get">
-          <h2>Ready to Get Started?</h2>
-          <p>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              placeholder="Your name"
-              required
-            />
-          </p>
-          <p>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="Your email address"
-              required
-            />
-          </p>
-          <p>
-            <textarea
-              id="message"
-              name="message"
-              rows="5"
-              cols="33"
-              placeholder="Write your message..."
-            ></textarea>
-          </p>
-          <p>
-            <button id="send_message_button">Send Message</button>
-          </p>
-        </form>
+        <div id="contact_info">
+          <div id="contact_info_apps">
+            <a
+              class="contact_app"
+              href="https://www.linkedin.com/in/razvan-dusa-7bb380334"
+            >
+              <img
+                src="images/LinkedIn_icon.png"
+                alt="LinkedIn Logo"
+                width="32"
+                height="32"
+              />
+              <div class="contact_app_info">
+                <p class="contact_app_name">LinkedIn</p>
+                <p class="contact_app_username">User: Razvan Dusa</p>
+              </div>
+            </a>
+            <a class="contact_app" href="https://github.com/razvandusa">
+              <img
+                src="images/GitHub_icon.png"
+                alt="Github Logo"
+                width="32"
+                height="32"
+              />
+              <div class="contact_app_info">
+                <p class="contact_app_name">GitHub</p>
+                <p class="contact_app_username">User: razvandusa</p>
+              </div>
+            </a>
+            <a
+              class="contact_app"
+              id="linkedin_profile"
+              href="https://discordapp.com/users/1032314731060547684"
+            >
+              <img
+                src="images/Discord_icon.png"
+                alt="Discord Logo"
+                width="32"
+                height="32"
+              />
+              <div class="contact_app_info">
+                <p class="contact_app_name">Discord</p>
+                <p class="contact_app_username">User: razvandusa</p>
+              </div>
+            </a>
+          </div>
+          <form id="contact_form" action="./submit_page" method="get">
+            <h2>Ready to Get Started?</h2>
+            <p>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Your name"
+                required
+              />
+            </p>
+            <p>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Your email address"
+                required
+              />
+            </p>
+            <p>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                cols="33"
+                placeholder="Write your message..."
+              ></textarea>
+            </p>
+            <p>
+              <button id="send_message_button">Send Message</button>
+            </p>
+          </form>
+        </div>
         <br />
       </section>
     </main>
