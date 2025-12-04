@@ -241,13 +241,13 @@ address {
   margin-top: -30px;
 }
 
-@media (width > 482px) {
+@media (width > 500px) {
   .contact_app {
     margin-left: 40px;
   }
 }
 
-@media (width <= 482px) {
+@media (width <= 500px) {
   #contact_info {
     flex-direction: column;
   }
