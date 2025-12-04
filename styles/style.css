@@ -116,7 +116,9 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-figure {
+#discipline_manager,
+#my_e_shopping_website {
+  max-width: 90%;
   width: 340px;
   padding-top: 10px;
   padding-bottom: 1px;
@@ -178,14 +180,18 @@ figcaption {
   text-align: left;
 }
 
-.project-content {
+.project_content {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  gap: 40px;
   padding-bottom: 20px;
+  max-width: 100%;
 }
 
-figure img {
+#discipline_manager_image,
+#my_e_shopping_website_image {
+  max-width: 100%;
   width: 340px;
   height: 280px;
   border-top-left-radius: 15px;
