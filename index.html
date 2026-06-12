@@ -2,222 +2,233 @@
 <html lang="en-US">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="This is a webpage about myself where you can explore the projects I have worked on."
+      content="Razvan Dusa — computer science student at Babeș-Bolyai University. Selected projects in Java, C++, and the web."
     />
-    <title>razvandusa</title>
+    <title>razvan dusa — portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Space+Grotesk:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
     <link href="styles/style.css" rel="stylesheet" />
   </head>
 
   <body>
-    <header>
-      <nav>
-        <div class="nav_link">
-          <a href="#my_name">Home</a>
-          <a href="#about_me">About</a>
-          <a href="#my_work">Portofolio</a>
-          <a href="#contact">Contact</a>
-        </div>
+    <div class="grain" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="topbar-name" href="#top">razvan dusa</a>
+      <nav class="topbar-nav">
+        <a href="#work">work</a>
+        <a href="#contact">contact</a>
+        <a class="topbar-cta" href="https://github.com/razvandusa">github ↗</a>
       </nav>
-      <h1 id="my_name">Razvan Dusa</h1>
     </header>
 
-    <main>
-      <section id="about_me">
-        <h2>About Me</h2>
-        <div class="about_me_description">
-          <p>
-            Hello! I am Razvan Dușa, a passionate Computer Science student at
-            Babes-Bolyai University, with a passion for technology and coding.
-            <br />
-            <br />
-            I graduated from Colegiul National Octavian Goga High School with a
-            GPA 3.8/4.0. In the Baccalaureate exam, I scored 9.85/10 in Computer
-            Science.
-            <br />
-            <br />
-            If you want to learn more about me, feel free to reach out!
-          </p>
-        </div>
-      </section>
+    <main id="top">
+      <!-- ============ hero ============ -->
+      <section class="hero">
+        <div class="hero-glow" aria-hidden="true"></div>
 
-      <section id="my_work">
-        <h2>My Work</h2>
-        <p class="my_work_description">
-          Below, you will find some of my projects which are available for
-          viewing on GitHub.
+        <p class="hero-kicker" data-reveal>
+          <span class="dot"></span> computer science student — cluj-napoca
         </p>
-        <div class="project_content">
-          <figure id="my_e_shopping_website">
-            <a href="https://github.com/razvandusa/SocialNetwork">
-              <img
-                id="my_e_shopping_website_image"
-                src="images/LuckyLink.png"
-                width="200"
-                height="200"
-                alt="Social Network Project"
-              />
-            </a>
-            <figcaption>
-              <strong
-                ><a
-                  class="github_link"
-                  href="https://github.com/razvandusa/SocialNetwork"
-                  >Social-Network</a
-                ></strong
-              >
-              <p class="project_description">
-                A responsive social network platform built with Java, JavaFX,
-                PostgreSQL, and multithreading for concurrent operations.
-              </p>
-            </figcaption>
-          </figure>
 
-          <figure id="discipline_manager">
-            <a href="https://github.com/razvandusa/DisciplineManager">
-              <img
-                id="discipline_manager_image"
-                src="images/DisciplineManager.png"
-                width="200"
-                height="200"
-                alt="Discipline Manager Project"
-              />
-            </a>
-            <figcaption>
-              <strong
-                ><a
-                  class="github_link"
-                  href="https://github.com/razvandusa/DisciplineManager"
-                  >Discipline-Manager</a
-                ></strong
-              >
-              <p class="project_description">
-                A C++ academic management tool for tracking disciplines, grades,
-                and performance.
-              </p>
-            </figcaption>
-          </figure>
+        <h1 class="hero-title">
+          <span class="hero-line" data-reveal>Razvan</span>
+          <span class="hero-line hero-line-italic" data-reveal style="--d: 0.12s"
+            >Dusa</span
+          >
+        </h1>
 
-          <figure id="my_e_shopping_website">
-            <a
-              href="https://github.com/razvandusa/High-school-graduation-project"
-            >
-              <img
-                id="my_e_shopping_website_image"
-                src="images/MyECommerceWebsite.png"
-                width="200"
-                height="200"
-                alt="Discipline Manager Project"
-              />
-            </a>
-            <figcaption>
-              <strong
-                ><a
-                  class="github_link"
-                  href="https://github.com/razvandusa/High-school-graduation-project"
-                  >My-E-Shopping-Website</a
-                ></strong
-              >
-              <p class="project_description">
-                A responsive online store built with HTML, CSS, and JavaScript.
-              </p>
-            </figcaption>
-          </figure>
-        </div>
-        <br />
+        <p class="hero-sub" data-reveal style="--d: 0.24s">
+          Studying computer science at <em>Babeș-Bolyai University</em> and
+          building software along the way — desktop apps in Java and C++,
+          databases, and the open web.
+        </p>
+
+        <a class="hero-scroll" href="#work" data-reveal style="--d: 0.36s">
+          <span>selected work</span>
+          <span class="hero-scroll-arrow">↓</span>
+        </a>
       </section>
 
-      <section id="contact">
-        <h1>Let's Connect!</h1>
-        <p class="contact_intro">Input your contact details below:</p>
-        <div id="contact_info">
-          <div id="contact_info_apps">
-            <a
-              class="contact_app"
-              href="https://www.linkedin.com/in/razvan-dusa-7bb380334"
-            >
-              <img
-                src="images/LinkedIn_icon.png"
-                alt="LinkedIn Logo"
-                width="32"
-                height="32"
-              />
-              <div class="contact_app_info">
-                <p class="contact_app_name">LinkedIn</p>
-                <p class="contact_app_username">User: Razvan Dusa</p>
-              </div>
-            </a>
-            <a class="contact_app" href="https://github.com/razvandusa">
-              <img
-                src="images/GitHub_icon.png"
-                alt="Github Logo"
-                width="32"
-                height="32"
-              />
-              <div class="contact_app_info">
-                <p class="contact_app_name">GitHub</p>
-                <p class="contact_app_username">User: razvandusa</p>
-              </div>
-            </a>
-            <a
-              class="contact_app"
-              id="linkedin_profile"
-              href="https://discordapp.com/users/1032314731060547684"
-            >
-              <img
-                src="images/Discord_icon.png"
-                alt="Discord Logo"
-                width="32"
-                height="32"
-              />
-              <div class="contact_app_info">
-                <p class="contact_app_name">Discord</p>
-                <p class="contact_app_username">User: razvandusa</p>
-              </div>
+      <!-- ============ marquee ============ -->
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span>
+            java <i>✦</i> c++ <i>✦</i> javascript <i>✦</i> javafx <i>✦</i>
+            postgresql <i>✦</i> multithreading <i>✦</i> html &amp; css <i>✦</i>
+          </span>
+          <span>
+            java <i>✦</i> c++ <i>✦</i> javascript <i>✦</i> javafx <i>✦</i>
+            postgresql <i>✦</i> multithreading <i>✦</i> html &amp; css <i>✦</i>
+          </span>
+        </div>
+      </div>
+
+      <!-- ============ work ============ -->
+      <section class="work" id="work">
+        <div class="section-head" data-reveal>
+          <span class="section-label">01 — selected work</span>
+          <h2 class="section-title">Three projects,<br /><em>three languages.</em></h2>
+        </div>
+
+        <article class="project" data-reveal>
+          <div class="project-media">
+            <a href="https://github.com/razvandusa/SocialNetwork">
+              <img src="images/LuckyLink.png" alt="Social-Network project screenshot" />
             </a>
           </div>
-          <form id="contact_form" action="./submit_page" method="get">
-            <h2>Ready to Get Started?</h2>
-            <p>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Your name"
-                required
+          <div class="project-info">
+            <span class="project-index">№ 01</span>
+            <h3 class="project-title">
+              <a href="https://github.com/razvandusa/SocialNetwork"
+                >Social-Network</a
+              >
+            </h3>
+            <p class="project-desc">
+              A desktop social network platform with real-time feel — friend
+              requests, messaging, and concurrent operations handled through
+              multithreading on top of a PostgreSQL backend.
+            </p>
+            <ul class="project-tags">
+              <li>java</li>
+              <li>javafx</li>
+              <li>postgresql</li>
+              <li>multithreading</li>
+            </ul>
+            <a class="project-link" href="https://github.com/razvandusa/SocialNetwork"
+              >view on github <span>↗</span></a
+            >
+          </div>
+        </article>
+
+        <article class="project project-flip" data-reveal>
+          <div class="project-media">
+            <a href="https://github.com/razvandusa/DisciplineManager">
+              <img
+                src="images/DisciplineManager.png"
+                alt="Discipline-Manager project screenshot"
               />
+            </a>
+          </div>
+          <div class="project-info">
+            <span class="project-index">№ 02</span>
+            <h3 class="project-title">
+              <a href="https://github.com/razvandusa/DisciplineManager"
+                >Discipline-Manager</a
+              >
+            </h3>
+            <p class="project-desc">
+              An academic management tool written in C++ for tracking
+              disciplines, grades, and performance — a student's semester,
+              organized in one place.
             </p>
-            <p>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Your email address"
-                required
+            <ul class="project-tags">
+              <li>c++</li>
+              <li>oop</li>
+              <li>desktop</li>
+            </ul>
+            <a
+              class="project-link"
+              href="https://github.com/razvandusa/DisciplineManager"
+              >view on github <span>↗</span></a
+            >
+          </div>
+        </article>
+
+        <article class="project" data-reveal>
+          <div class="project-media">
+            <a href="https://github.com/razvandusa/High-school-graduation-project">
+              <img
+                src="images/MyECommerceWebsite.png"
+                alt="My-E-Shopping-Website project screenshot"
               />
+            </a>
+          </div>
+          <div class="project-info">
+            <span class="project-index">№ 03</span>
+            <h3 class="project-title">
+              <a href="https://github.com/razvandusa/High-school-graduation-project"
+                >My-E-Shopping-Website</a
+              >
+            </h3>
+            <p class="project-desc">
+              A responsive online store built from scratch with vanilla HTML,
+              CSS, and JavaScript — my high-school graduation project and first
+              full build for the web.
             </p>
-            <p>
-              <textarea
-                id="message"
-                name="message"
-                rows="5"
-                cols="33"
-                placeholder="Write your message..."
-              ></textarea>
-            </p>
-            <p>
-              <button id="send_message_button">Send Message</button>
-            </p>
-          </form>
+            <ul class="project-tags">
+              <li>html</li>
+              <li>css</li>
+              <li>javascript</li>
+            </ul>
+            <a
+              class="project-link"
+              href="https://github.com/razvandusa/High-school-graduation-project"
+              >view on github <span>↗</span></a
+            >
+          </div>
+        </article>
+      </section>
+
+      <!-- ============ contact ============ -->
+      <section class="contact" id="contact">
+        <div class="section-head" data-reveal>
+          <span class="section-label">02 — contact</span>
+          <h2 class="section-title contact-title">
+            Let's build<br /><em>something.</em>
+          </h2>
         </div>
-        <br />
+
+        <div class="contact-links" data-reveal style="--d: 0.15s">
+          <a class="contact-row" href="https://github.com/razvandusa">
+            <span class="contact-row-label">github</span>
+            <span class="contact-row-value">@razvandusa</span>
+            <span class="contact-row-arrow">↗</span>
+          </a>
+          <a
+            class="contact-row"
+            href="https://www.linkedin.com/in/razvan-dusa-7bb380334"
+          >
+            <span class="contact-row-label">linkedin</span>
+            <span class="contact-row-value">razvan dusa</span>
+            <span class="contact-row-arrow">↗</span>
+          </a>
+        </div>
       </section>
     </main>
 
-    <footer>
-      <address>© 2025 Razvan Dusa. All rights reserved. <br /></address>
+    <footer class="footer">
+      <span class="footer-giant" aria-hidden="true">razvan dusa</span>
+      <div class="footer-meta">
+        <span>© 2026 razvan dusa</span>
+        <span>cluj-napoca, romania</span>
+        <a href="#top">back to top ↑</a>
+      </div>
     </footer>
+
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          }
+        },
+        { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
+      );
+
+      document
+        .querySelectorAll("[data-reveal]")
+        .forEach((el) => observer.observe(el));
+    </script>
   </body>
 </html>
