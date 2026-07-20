@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Razvan Dusa — computer science student at Babeș-Bolyai University. Selected projects in Java, C++, and the web."
+      content="Razvan Dusa — computer science student at Babes-Bolyai University building software in Java, C++, and for the web."
     />
-    <title>razvan dusa — portfolio</title>
+    <title>Razvan Dusa — Software Developer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Space+Grotesk:wght@300;400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
     <link href="styles/style.css" rel="stylesheet" />
@@ -20,200 +20,393 @@
   <body>
     <div class="grain" aria-hidden="true"></div>
 
-    <header class="topbar">
-      <a class="topbar-name" href="#top">razvan dusa</a>
-      <nav class="topbar-nav">
-        <a href="#work">work</a>
-        <a href="#contact">contact</a>
-        <a class="topbar-cta" href="https://github.com/razvandusa">github ↗</a>
+    <!-- ================= nav ================= -->
+    <header class="nav" id="nav">
+      <a class="nav-logo" href="#top">razvan<span>dusa</span></a>
+      <nav class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
       </nav>
+      <a class="nav-cta" href="https://github.com/razvandusa" target="_blank" rel="noopener">
+        GitHub <span aria-hidden="true">&#8599;</span>
+      </a>
     </header>
 
     <main id="top">
-      <!-- ============ hero ============ -->
+      <!-- ================= hero ================= -->
       <section class="hero">
         <div class="hero-glow" aria-hidden="true"></div>
 
-        <p class="hero-kicker" data-reveal>
-          <span class="dot"></span> computer science student — cluj-napoca
+        <div class="container">
+        <p class="hero-eyebrow" data-reveal>
+          <span class="pulse-dot" aria-hidden="true"></span>
+          Computer Science @ Babes-Bolyai University
         </p>
 
-        <h1 class="hero-title">
-          <span class="hero-line" data-reveal>Razvan</span>
-          <span class="hero-line hero-line-italic" data-reveal style="--d: 0.12s"
-            >Dusa</span
-          >
+        <h1 class="hero-title" data-reveal style="--d: 0.1s">
+          Building software<br />
+          with <em>precision</em><br />
+          and curiosity.
         </h1>
 
-        <p class="hero-sub" data-reveal style="--d: 0.24s">
-          Studying computer science at <em>Babeș-Bolyai University</em> and
-          building software along the way — desktop apps in Java and C++,
-          databases, and the open web.
+        <p class="hero-sub" data-reveal style="--d: 0.2s">
+          I'm Razvan Dusa — a computer science student in Cluj-Napoca, Romania,
+          crafting desktop applications, databases, and web experiences with
+          Java, C++, and JavaScript.
         </p>
 
-        <a class="hero-scroll" href="#work" data-reveal style="--d: 0.36s">
-          <span>selected work</span>
-          <span class="hero-scroll-arrow">↓</span>
+        <div class="hero-actions" data-reveal style="--d: 0.3s">
+          <a class="btn btn-solid" href="#work">View my work</a>
+          <a class="btn btn-ghost" href="#contact">Get in touch</a>
+        </div>
+        </div>
+
+        <a class="hero-scroll" href="#work" aria-label="Scroll to projects">
+          <span class="hero-scroll-line" aria-hidden="true"></span>
         </a>
       </section>
 
-      <!-- ============ marquee ============ -->
+      <!-- ================= marquee ================= -->
       <div class="marquee" aria-hidden="true">
         <div class="marquee-track">
-          <span>
-            java <i>✦</i> c++ <i>✦</i> javascript <i>✦</i> javafx <i>✦</i>
-            postgresql <i>✦</i> multithreading <i>✦</i> html &amp; css <i>✦</i>
-          </span>
-          <span>
-            java <i>✦</i> c++ <i>✦</i> javascript <i>✦</i> javafx <i>✦</i>
-            postgresql <i>✦</i> multithreading <i>✦</i> html &amp; css <i>✦</i>
-          </span>
+          <span>Java &nbsp;&#10022;&nbsp; C++ &nbsp;&#10022;&nbsp; JavaScript &nbsp;&#10022;&nbsp; JavaFX &nbsp;&#10022;&nbsp; Spring Boot &nbsp;&#10022;&nbsp; React &nbsp;&#10022;&nbsp; PostgreSQL &nbsp;&#10022;&nbsp; Multithreading &nbsp;&#10022;&nbsp; HTML &amp; CSS &nbsp;&#10022;&nbsp; OOP &nbsp;&#10022;&nbsp;</span>
+          <span>Java &nbsp;&#10022;&nbsp; C++ &nbsp;&#10022;&nbsp; JavaScript &nbsp;&#10022;&nbsp; JavaFX &nbsp;&#10022;&nbsp; Spring Boot &nbsp;&#10022;&nbsp; React &nbsp;&#10022;&nbsp; PostgreSQL &nbsp;&#10022;&nbsp; Multithreading &nbsp;&#10022;&nbsp; HTML &amp; CSS &nbsp;&#10022;&nbsp; OOP &nbsp;&#10022;&nbsp;</span>
         </div>
       </div>
 
-      <!-- ============ work ============ -->
+      <!-- ================= work ================= -->
       <section class="work" id="work">
-        <div class="section-head" data-reveal>
-          <span class="section-label">01 — selected work</span>
-          <h2 class="section-title">Three projects,<br /><em>three languages.</em></h2>
-        </div>
+        <header class="section-head" data-reveal>
+          <p class="section-eyebrow">01 &mdash; Selected Work</p>
+          <h2 class="section-title">Projects I'm proud of.</h2>
+        </header>
 
+        <!-- project 01 -->
         <article class="project" data-reveal>
-          <div class="project-media">
-            <a href="https://github.com/razvandusa/SocialNetwork">
-              <img src="images/LuckyLink.png" alt="Social-Network project screenshot" />
-            </a>
-          </div>
+          <a
+            class="project-media"
+            aria-label="AirlineServices on GitHub"
+            href="https://github.com/razvandusa/AirlineServices"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="media-chrome" aria-hidden="true">
+              <i></i><i></i><i></i>
+            </span>
+            <span class="media-board" aria-hidden="true">
+              <span class="board-icon">&#9992;</span>
+              <span class="board-rows">
+                <span class="board-row"><b>ZB101</b><span>Cluj-Napoca</span><em>Boarding</em></span>
+                <span class="board-row"><b>ZB204</b><span>Bucharest</span><em>On time</em></span>
+                <span class="board-row"><b>ZB317</b><span>Vienna</span><em>On time</em></span>
+                <span class="board-row"><b>ZB428</b><span>Berlin</span><em>Delayed</em></span>
+              </span>
+            </span>
+          </a>
           <div class="project-info">
-            <span class="project-index">№ 01</span>
+            <span class="project-index">01</span>
             <h3 class="project-title">
-              <a href="https://github.com/razvandusa/SocialNetwork"
-                >Social-Network</a
-              >
+              <a href="https://github.com/razvandusa/AirlineServices" target="_blank" rel="noopener">AirlineServices</a>
             </h3>
             <p class="project-desc">
-              A desktop social network platform with real-time feel — friend
-              requests, messaging, and concurrent operations handled through
-              multithreading on top of a PostgreSQL backend.
+              A multi-module flight management system built two ways: a JavaFX
+              client/server pair speaking a custom JSON socket protocol, and a
+              Spring Boot REST API with JWT authentication and WebSocket live
+              updates, consumed by a React web client. Persistence runs through
+              both plain JDBC and Hibernate over SQLite.
             </p>
             <ul class="project-tags">
-              <li>java</li>
-              <li>javafx</li>
-              <li>postgresql</li>
-              <li>multithreading</li>
+              <li>Java</li>
+              <li>Spring Boot</li>
+              <li>React</li>
+              <li>JavaFX</li>
+              <li>WebSocket</li>
             </ul>
-            <a class="project-link" href="https://github.com/razvandusa/SocialNetwork"
-              >view on github <span>↗</span></a
+            <a
+              class="project-link"
+              href="https://github.com/razvandusa/AirlineServices"
+              target="_blank"
+              rel="noopener"
             >
+              View on GitHub <span aria-hidden="true">&#8599;</span>
+            </a>
           </div>
         </article>
 
+        <!-- project 02 -->
         <article class="project project-flip" data-reveal>
-          <div class="project-media">
-            <a href="https://github.com/razvandusa/DisciplineManager">
-              <img
-                src="images/DisciplineManager.png"
-                alt="Discipline-Manager project screenshot"
-              />
-            </a>
-          </div>
+          <a
+            class="project-media"
+            aria-label="Social-Network on GitHub"
+            href="https://github.com/razvandusa/SocialNetwork"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="media-chrome" aria-hidden="true">
+              <i></i><i></i><i></i>
+            </span>
+            <span class="media-board board-chat" aria-hidden="true">
+              <span class="chat-header"><i class="status-dot"></i><b>ana_pop</b><em>online</em></span>
+              <span class="chat-bubble in">Hey! Just accepted your friend request</span>
+              <span class="chat-bubble out">Welcome aboard — let's chat!</span>
+              <span class="chat-bubble in">This app feels really fast</span>
+              <span class="chat-typing"><i></i><i></i><i></i></span>
+            </span>
+          </a>
           <div class="project-info">
-            <span class="project-index">№ 02</span>
+            <span class="project-index">02</span>
             <h3 class="project-title">
-              <a href="https://github.com/razvandusa/DisciplineManager"
-                >Discipline-Manager</a
-              >
+              <a href="https://github.com/razvandusa/SocialNetwork" target="_blank" rel="noopener">Social-Network</a>
             </h3>
             <p class="project-desc">
-              An academic management tool written in C++ for tracking
-              disciplines, grades, and performance — a student's semester,
-              organized in one place.
+              A desktop social platform engineered in Java with a JavaFX
+              interface. Friend requests, real-time messaging, and concurrent
+              operations are handled through multithreading, all persisted in a
+              PostgreSQL database.
             </p>
             <ul class="project-tags">
-              <li>c++</li>
-              <li>oop</li>
-              <li>desktop</li>
+              <li>Java</li>
+              <li>JavaFX</li>
+              <li>PostgreSQL</li>
+              <li>Multithreading</li>
+            </ul>
+            <a
+              class="project-link"
+              href="https://github.com/razvandusa/SocialNetwork"
+              target="_blank"
+              rel="noopener"
+            >
+              View on GitHub <span aria-hidden="true">&#8599;</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- project 03 -->
+        <article class="project" data-reveal>
+          <a
+            class="project-media"
+            aria-label="Discipline-Manager on GitHub"
+            href="https://github.com/razvandusa/DisciplineManager"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="media-chrome" aria-hidden="true">
+              <i></i><i></i><i></i>
+            </span>
+            <span class="media-board board-grades" aria-hidden="true">
+              <span class="grades-title">Semester overview</span>
+              <span class="grade-row" style="--w: 100%"><b>Algorithms</b><i></i><em>10</em></span>
+              <span class="grade-row" style="--w: 100%"><b>OOP</b><i></i><em>10</em></span>
+              <span class="grade-row" style="--w: 90%"><b>Databases</b><i></i><em>9</em></span>
+              <span class="grade-row" style="--w: 100%"><b>Data Structures</b><i></i><em>10</em></span>
+            </span>
+          </a>
+          <div class="project-info">
+            <span class="project-index">03</span>
+            <h3 class="project-title">
+              <a href="https://github.com/razvandusa/DisciplineManager" target="_blank" rel="noopener">Discipline-Manager</a>
+            </h3>
+            <p class="project-desc">
+              An academic management tool written in modern C++ for tracking
+              disciplines, grades, and performance across a semester — clean
+              object-oriented design applied to a real student workflow.
+            </p>
+            <ul class="project-tags">
+              <li>C++</li>
+              <li>OOP</li>
+              <li>Desktop</li>
             </ul>
             <a
               class="project-link"
               href="https://github.com/razvandusa/DisciplineManager"
-              >view on github <span>↗</span></a
+              target="_blank"
+              rel="noopener"
             >
+              View on GitHub <span aria-hidden="true">&#8599;</span>
+            </a>
           </div>
         </article>
 
-        <article class="project" data-reveal>
-          <div class="project-media">
-            <a href="https://github.com/razvandusa/High-school-graduation-project">
-              <img
-                src="images/MyECommerceWebsite.png"
-                alt="My-E-Shopping-Website project screenshot"
-              />
-            </a>
-          </div>
+        <!-- project 04 -->
+        <article class="project project-flip" data-reveal>
+          <a
+            class="project-media"
+            aria-label="My-E-Shopping-Website on GitHub"
+            href="https://github.com/razvandusa/High-school-graduation-project"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="media-chrome" aria-hidden="true">
+              <i></i><i></i><i></i>
+            </span>
+            <span class="media-board board-shop" aria-hidden="true">
+              <span class="shop-topbar"><b>my-e-shop</b><em>Cart &middot; 3</em></span>
+              <span class="shop-grid">
+                <span class="shop-card">
+                  <i class="thumb t1">
+                    <svg viewBox="0 0 64 44" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M3 33v-6c0-4 3-7 8-8l7-2c2-1 4-3 5-5l2-3c4 4 9 7 15 8l12 3c6 1 9 4 9 8v5H3Z"/>
+                      <path d="M22 20l5 4M27 15l5 4M3 38h58"/>
+                    </svg>
+                  </i>
+                  <b>Sneakers</b><em>$59</em>
+                </span>
+                <span class="shop-card">
+                  <i class="thumb t2">
+                    <svg viewBox="0 0 64 52" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M10 38V26a22 22 0 0 1 44 0v12"/>
+                      <rect x="6" y="32" width="11" height="16" rx="5"/>
+                      <rect x="47" y="32" width="11" height="16" rx="5"/>
+                    </svg>
+                  </i>
+                  <b>Headphones</b><em>$89</em>
+                </span>
+                <span class="shop-card">
+                  <i class="thumb t3">
+                    <svg viewBox="0 0 64 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M23 14v-2a9 9 0 0 1 18 0v2"/>
+                      <rect x="12" y="14" width="40" height="42" rx="12"/>
+                      <path d="M12 34h40"/>
+                      <rect x="24" y="40" width="16" height="12" rx="5"/>
+                    </svg>
+                  </i>
+                  <b>Backpack</b><em>$45</em>
+                </span>
+                <span class="shop-card">
+                  <i class="thumb t4">
+                    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M24 14l2-10h12l2 10M24 50l2 10h12l2-10"/>
+                      <circle cx="32" cy="32" r="16"/>
+                      <path d="M32 24v8l6 4"/>
+                    </svg>
+                  </i>
+                  <b>Watch</b><em>$120</em>
+                </span>
+              </span>
+            </span>
+          </a>
           <div class="project-info">
-            <span class="project-index">№ 03</span>
+            <span class="project-index">04</span>
             <h3 class="project-title">
-              <a href="https://github.com/razvandusa/High-school-graduation-project"
-                >My-E-Shopping-Website</a
-              >
+              <a href="https://github.com/razvandusa/High-school-graduation-project" target="_blank" rel="noopener">My-E-Shopping-Website</a>
             </h3>
             <p class="project-desc">
               A responsive online store built from scratch with vanilla HTML,
-              CSS, and JavaScript — my high-school graduation project and first
-              full build for the web.
+              CSS, and JavaScript — my high-school graduation project and the
+              build that started it all.
             </p>
             <ul class="project-tags">
-              <li>html</li>
-              <li>css</li>
-              <li>javascript</li>
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>JavaScript</li>
             </ul>
             <a
               class="project-link"
               href="https://github.com/razvandusa/High-school-graduation-project"
-              >view on github <span>↗</span></a
+              target="_blank"
+              rel="noopener"
             >
+              View on GitHub <span aria-hidden="true">&#8599;</span>
+            </a>
           </div>
         </article>
       </section>
 
-      <!-- ============ contact ============ -->
-      <section class="contact" id="contact">
-        <div class="section-head" data-reveal>
-          <span class="section-label">02 — contact</span>
-          <h2 class="section-title contact-title">
-            Let's build<br /><em>something.</em>
-          </h2>
+      <!-- ================= about ================= -->
+      <section class="about" id="about">
+        <header class="section-head" data-reveal>
+          <p class="section-eyebrow">02 &mdash; About</p>
+          <h2 class="section-title">Behind the code.</h2>
+        </header>
+
+        <div class="about-grid">
+          <p class="about-lead" data-reveal>
+            I study computer science at Babes-Bolyai University in Cluj-Napoca,
+            where I focus on writing software that is <strong>correct,
+            concurrent, and clean</strong>. From multithreaded Java backends to
+            C++ systems and the open web, I care about the engineering behind
+            the interface.
+          </p>
+
+          <dl class="about-facts" data-reveal style="--d: 0.15s">
+            <div class="fact">
+              <dt>University</dt>
+              <dd>Babes-Bolyai University</dd>
+            </div>
+            <div class="fact">
+              <dt>Field</dt>
+              <dd>Computer Science</dd>
+            </div>
+            <div class="fact">
+              <dt>Based in</dt>
+              <dd>Cluj-Napoca, Romania</dd>
+            </div>
+            <div class="fact">
+              <dt>Focus</dt>
+              <dd>Java &middot; C++ &middot; Web</dd>
+            </div>
+          </dl>
         </div>
+      </section>
+
+      <!-- ================= contact ================= -->
+      <section class="contact" id="contact">
+        <header class="section-head" data-reveal>
+          <p class="section-eyebrow">03 &mdash; Contact</p>
+          <h2 class="section-title contact-title">
+            Have a project in mind?<br /><em>Let's talk.</em>
+          </h2>
+        </header>
 
         <div class="contact-links" data-reveal style="--d: 0.15s">
-          <a class="contact-row" href="https://github.com/razvandusa">
-            <span class="contact-row-label">github</span>
-            <span class="contact-row-value">@razvandusa</span>
-            <span class="contact-row-arrow">↗</span>
+          <a
+            class="contact-row"
+            href="https://github.com/razvandusa"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="contact-label">
+              <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor" aria-hidden="true">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+              </svg>
+              GitHub
+            </span>
+            <span class="contact-value">@razvandusa</span>
+            <span class="contact-arrow" aria-hidden="true">&#8599;</span>
           </a>
+
           <a
             class="contact-row"
             href="https://www.linkedin.com/in/razvan-dusa-7bb380334"
+            target="_blank"
+            rel="noopener"
           >
-            <span class="contact-row-label">linkedin</span>
-            <span class="contact-row-value">razvan dusa</span>
-            <span class="contact-row-arrow">↗</span>
+            <span class="contact-label">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.11 20.45H3.55V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"/>
+              </svg>
+              LinkedIn
+            </span>
+            <span class="contact-value">Razvan Dusa</span>
+            <span class="contact-arrow" aria-hidden="true">&#8599;</span>
           </a>
         </div>
       </section>
     </main>
 
+    <!-- ================= footer ================= -->
     <footer class="footer">
       <span class="footer-giant" aria-hidden="true">razvan dusa</span>
       <div class="footer-meta">
-        <span>© 2026 razvan dusa</span>
-        <span>cluj-napoca, romania</span>
-        <a href="#top">back to top ↑</a>
+        <span>&copy; <span id="year">2026</span> Razvan Dusa</span>
+        <span>Designed &amp; built by me</span>
+        <a href="#top">Back to top &#8593;</a>
       </div>
     </footer>
 
     <script>
+      // Reveal-on-scroll
       const observer = new IntersectionObserver(
         (entries) => {
           for (const entry of entries) {
@@ -223,12 +416,17 @@
             }
           }
         },
-        { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
+        { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
       );
+      document.querySelectorAll("[data-reveal]").forEach((el) => observer.observe(el));
 
-      document
-        .querySelectorAll("[data-reveal]")
-        .forEach((el) => observer.observe(el));
+      // Nav background after scrolling past the hero top
+      const nav = document.getElementById("nav");
+      addEventListener("scroll", () => {
+        nav.classList.toggle("nav-scrolled", scrollY > 24);
+      }, { passive: true });
+
+      document.getElementById("year").textContent = new Date().getFullYear();
     </script>
   </body>
 </html>
