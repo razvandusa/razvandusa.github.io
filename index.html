@@ -580,13 +580,13 @@
           drops = Array.from({ length: cols }, () => Math.random() * (h / fontSize));
         }
         function frame() {
-          ctx.fillStyle = "rgba(11,13,10,0.32)";
+          ctx.fillStyle = "rgba(11,13,10,0.42)";
           ctx.fillRect(0, 0, w, h);
           ctx.font = fontSize + "px ui-monospace, Menlo, monospace";
           for (let i = 0; i < cols; i++) {
             const ch = glyphs[(Math.random() * glyphs.length) | 0];
             const y = drops[i] * fontSize;
-            ctx.fillStyle = Math.random() < 0.07 ? "#eafcc0" : "rgba(200,245,73,0.8)";
+            ctx.fillStyle = Math.random() < 0.035 ? "#d3ea9c" : "rgba(200,245,73,0.5)";
             ctx.fillText(ch, i * fontSize, y);
             if (y > h && Math.random() > 0.975) drops[i] = 0;
             drops[i] += 0.5;
