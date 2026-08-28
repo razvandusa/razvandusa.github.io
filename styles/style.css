@@ -882,6 +882,110 @@ img {
   color: var(--ink-faint);
 }
 
+/* --- vulnforge: security console --- */
+
+.board-sec {
+  gap: 16px;
+  background:
+    radial-gradient(420px 300px at 85% 8%, rgba(124, 108, 255, 0.2), transparent 70%),
+    radial-gradient(360px 260px at 10% 95%, rgba(200, 245, 73, 0.12), transparent 70%),
+    #0d0d12;
+}
+
+.sec-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.sec-head b {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(13px, 1.4vw, 17px);
+  letter-spacing: 0.04em;
+}
+
+.sec-head em {
+  font-style: normal;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.sec-term {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--line);
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: clamp(11px, 1.15vw, 14px);
+}
+
+.sec-line {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  color: var(--ink-dim);
+}
+
+.sec-line i {
+  font-style: normal;
+  color: var(--violet);
+  font-weight: 700;
+}
+
+.sec-line b {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.sec-line u {
+  text-decoration: none;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 1px 6px;
+  border-radius: 5px;
+}
+
+.sec-ok,
+.sec-ok i {
+  color: var(--accent);
+}
+
+.sec-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sec-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+.sec-chip i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px 1px rgba(200, 245, 73, 0.55);
+}
+
 .project-index {
   font-family: var(--display);
   font-weight: 700;
