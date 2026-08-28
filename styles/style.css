@@ -114,6 +114,11 @@ img {
   .sec-vuln i {
     animation: none !important;
   }
+
+  .sec-glitch::before,
+  .sec-glitch::after {
+    display: none !important;
+  }
 }
 
 /* ============================================================
@@ -955,7 +960,7 @@ img {
   gap: 9px;
   padding: 14px 16px;
   border-radius: 8px;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.5);
   border: 1px solid var(--line);
   font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
   font-size: clamp(11px, 1.15vw, 14px);
@@ -1058,6 +1063,67 @@ img {
 @keyframes sec-flip {
   0%, 100% { background: var(--accent); box-shadow: 0 0 8px 1px rgba(200, 245, 73, 0.55); }
   30%, 55% { background: var(--danger); box-shadow: 0 0 10px 1px rgba(255, 84, 104, 0.7); }
+}
+
+/* matrix rain canvas */
+.sec-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 14%, #000 82%, transparent);
+          mask-image: linear-gradient(180deg, transparent, #000 14%, #000 82%, transparent);
+}
+
+.sec-scan { z-index: 2; }
+
+.board-sec .sec-head,
+.board-sec .sec-term,
+.board-sec .sec-scanlist {
+  z-index: 1;
+}
+
+/* RGB-split glitch on the title */
+.sec-glitch {
+  position: relative;
+  display: inline-block;
+}
+
+.sec-glitch::before,
+.sec-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sec-glitch::before {
+  color: var(--danger);
+  animation: sec-glitch-a 3s infinite;
+}
+
+.sec-glitch::after {
+  color: var(--violet);
+  animation: sec-glitch-b 2.4s infinite;
+}
+
+@keyframes sec-glitch-a {
+  0%, 88%, 100% { opacity: 0; transform: translate(0, 0); clip-path: inset(0 0 100% 0); }
+  90% { opacity: 0.85; transform: translate(-2px, -1px); clip-path: inset(8% 0 58% 0); }
+  94% { opacity: 0.85; transform: translate(2px, 1px); clip-path: inset(62% 0 12% 0); }
+}
+
+@keyframes sec-glitch-b {
+  0%, 82%, 100% { opacity: 0; transform: translate(0, 0); clip-path: inset(0 0 100% 0); }
+  85% { opacity: 0.8; transform: translate(2px, 1px); clip-path: inset(20% 0 40% 0); }
+  88% { opacity: 0.8; transform: translate(-2px, 0); clip-path: inset(50% 0 22% 0); }
 }
 
 .project-index {

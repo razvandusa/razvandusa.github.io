@@ -393,8 +393,9 @@
               <i></i><i></i><i></i>
             </span>
             <span class="media-board board-sec" aria-hidden="true">
+              <canvas class="sec-canvas"></canvas>
               <span class="sec-scan"></span>
-              <span class="sec-head"><b>vulnforge</b><em>root@target:~#</em></span>
+              <span class="sec-head"><b class="sec-glitch" data-text="vulnforge">vulnforge</b><em>root@target:~#</em></span>
               <span class="sec-term">
                 <span class="sec-line"><i>$</i><span class="sec-type">inject: ' OR '1'='1</span><span class="sec-caret">&#9611;</span></span>
                 <span class="sec-line sec-ok"><i>&#10095;</i>root shell &middot; access granted</span>
@@ -565,6 +566,47 @@
       }, { passive: true });
 
       document.getElementById("year").textContent = new Date().getFullYear();
+
+      // VulnForge — matrix rain behind the exploit console
+      (function () {
+        const canvas = document.querySelector(".sec-canvas");
+        if (!canvas || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+        const glyphs = "01<>/{}#$*=+01アカサタナハマヤ0123456789ABCDEF".split("");
+        const fontSize = 13;
+        let cols = 0, drops = [], w = 0, h = 0;
+        function size() {
+          const r = canvas.getBoundingClientRect();
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          w = r.width; h = r.height;
+          canvas.width = w * dpr;
+          canvas.height = h * dpr;
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          cols = Math.max(1, Math.floor(w / fontSize));
+          drops = Array.from({ length: cols }, () => Math.random() * (h / fontSize));
+        }
+        function frame() {
+          ctx.fillStyle = "rgba(11,13,10,0.32)";
+          ctx.fillRect(0, 0, w, h);
+          ctx.font = fontSize + "px ui-monospace, Menlo, monospace";
+          for (let i = 0; i < cols; i++) {
+            const ch = glyphs[(Math.random() * glyphs.length) | 0];
+            const y = drops[i] * fontSize;
+            ctx.fillStyle = Math.random() < 0.07 ? "#eafcc0" : "rgba(200,245,73,0.8)";
+            ctx.fillText(ch, i * fontSize, y);
+            if (y > h && Math.random() > 0.975) drops[i] = 0;
+            drops[i] += 0.5;
+          }
+          requestAnimationFrame(frame);
+        }
+        try {
+          size();
+          if (window.ResizeObserver) new ResizeObserver(size).observe(canvas);
+          else window.addEventListener("resize", size);
+          requestAnimationFrame(frame);
+        } catch (e) {}
+      })();
     </script>
   </body>
 </html>
