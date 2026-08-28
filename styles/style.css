@@ -105,27 +105,24 @@ img {
     transition: none;
   }
   .marquee-track,
+  .chat-typing i,
   .pulse-dot,
-  .media-board,
-  .media-board *,
-  .media-board *::before,
-  .media-board *::after {
+  .board-icon,
+  .board-row em,
+  .grade-row i::after,
+  .thumb svg,
+  .shop-topbar em,
+  .net-alloc::after,
+  .sec-type,
+  .sec-caret,
+  .sec-ok,
+  .sec-ok2 {
     animation: none !important;
   }
 
-  /* the boards fall back to their finished, resting state */
   .sec-glitch::before,
-  .sec-glitch::after,
-  .chat-slot .chat-typing,
-  .shop-pointer,
-  .shop-fly {
+  .sec-glitch::after {
     display: none !important;
-  }
-
-  .plane-y,
-  .m3,
-  .chat-seen {
-    opacity: 1;
   }
 }
 
@@ -508,6 +505,12 @@ img {
     #0d0d12;
 }
 
+.board-icon {
+  font-size: clamp(36px, 4vw, 56px);
+  line-height: 1;
+  color: var(--accent);
+}
+
 .board-rows {
   display: flex;
   flex-direction: column;
@@ -675,7 +678,7 @@ img {
   color: var(--ink-dim);
 }
 
-.grade-row > i {
+.grade-row i {
   display: block;
   height: 6px;
   border-radius: 100px;
@@ -684,7 +687,7 @@ img {
   overflow: hidden;
 }
 
-.grade-row > i::after {
+.grade-row i::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -699,9 +702,9 @@ img {
   animation: grade-shimmer 3.2s linear infinite;
 }
 
-.grade-row:nth-child(3) > i::after { animation-delay: 0.4s; }
-.grade-row:nth-child(4) > i::after { animation-delay: 0.8s; }
-.grade-row:nth-child(5) > i::after { animation-delay: 1.2s; }
+.grade-row:nth-child(3) i::after { animation-delay: 0.5s; }
+.grade-row:nth-child(4) i::after { animation-delay: 1s; }
+.grade-row:nth-child(5) i::after { animation-delay: 1.5s; }
 
 @keyframes grade-shimmer {
   0% { background-position: -60% 0, 0 0; }
@@ -759,7 +762,6 @@ img {
 }
 
 .shop-card {
-  position: relative;
   display: flex;
   flex-direction: column;
   gap: 1px;
@@ -910,309 +912,18 @@ img {
   color: var(--ink-faint);
 }
 
-/* ============================================================
-   board choreography — every board plays a short, looping scene
-   base styles are the resting state, so with motion disabled the
-   boards still read correctly
-   ============================================================ */
+/* ---------- subtle motion on the remaining boards ---------- */
 
-/* boards go quiet while their project is off screen */
-.project-media.is-idle .media-board,
-.project-media.is-idle .media-board *,
-.project-media.is-idle .media-board *::before,
-.project-media.is-idle .media-board *::after {
-  animation-play-state: paused;
+/* 01 airline — plane drifts, statuses breathe like a live board */
+.board-icon {
+  animation: fly-float 4.5s ease-in-out infinite;
 }
 
-/* --- 01 airline: ZB101 rolls down the runway and lifts off --- */
-
-.board-air {
-  overflow: hidden;
+@keyframes fly-float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(4px, -4px); }
 }
 
-.runway {
-  position: relative;
-  flex: 1 1 auto;
-  min-height: 34px;
-}
-
-/* the departure path the aircraft is about to fly */
-.flight-path {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-.flight-path path {
-  fill: none;
-  stroke: rgba(200, 245, 73, 0.22);
-  stroke-width: 1;
-  stroke-linecap: round;
-  stroke-dasharray: 2 7;
-  animation: path-drift 6s linear infinite;
-}
-
-@keyframes path-drift {
-  to { stroke-dashoffset: -36; }
-}
-
-.runway-strip {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 11px;
-  border-radius: 2px;
-  overflow: hidden;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(244, 242, 238, 0.07) 10%,
-    rgba(244, 242, 238, 0.07) 90%,
-    transparent
-  );
-}
-
-/* threshold markings at the start of the runway */
-.runway-strip::before {
-  content: "";
-  position: absolute;
-  left: 6px;
-  top: 3px;
-  bottom: 3px;
-  width: 24px;
-  background: repeating-linear-gradient(
-    90deg,
-    rgba(244, 242, 238, 0.3) 0 2px,
-    transparent 2px 6px
-  );
-}
-
-/* centreline */
-.runway-strip i {
-  position: absolute;
-  left: 42px;
-  right: 8px;
-  top: 50%;
-  height: 2px;
-  margin-top: -1px;
-  background: repeating-linear-gradient(
-    90deg,
-    rgba(200, 245, 73, 0.3) 0 14px,
-    transparent 14px 36px
-  );
-}
-
-/* the flight path is split so each layer animates one thing:
-   x = ground roll + climb out, y = lift, plane = pitch */
-.plane-x {
-  position: absolute;
-  inset: 0;
-  animation: plane-x 7.5s linear infinite;
-}
-
-.plane-y {
-  position: absolute;
-  inset: 0;
-  animation: plane-y 7.5s linear infinite;
-}
-
-.plane {
-  position: absolute;
-  left: 3%;
-  bottom: 10px;
-  width: clamp(38px, 5vw, 58px);
-  color: var(--accent);
-  transform-origin: 45% 60%;
-  animation: plane-pitch 7.5s ease-in-out infinite;
-}
-
-.plane svg {
-  display: block;
-  width: 100%;
-  height: auto;
-  filter: drop-shadow(0 0 10px rgba(200, 245, 73, 0.35));
-}
-
-/* exhaust trail, pinned to the tail so it follows the pitch */
-.plane::after {
-  content: "";
-  position: absolute;
-  right: 94%;
-  top: 55%;
-  width: clamp(34px, 6vw, 80px);
-  height: 2px;
-  border-radius: 2px;
-  transform-origin: right center;
-  background: linear-gradient(90deg, transparent, rgba(200, 245, 73, 0.5));
-  opacity: 0;
-  animation: plane-trail 7.5s ease-out infinite;
-}
-
-.plane-shadow {
-  position: absolute;
-  left: 4%;
-  bottom: 3px;
-  width: clamp(34px, 4.5vw, 52px);
-  height: 5px;
-  border-radius: 50%;
-  background: rgba(200, 245, 73, 0.22);
-  filter: blur(2px);
-  animation: plane-shadow 7.5s ease-in-out infinite;
-}
-
-@keyframes plane-x {
-  0% {
-    transform: translateX(0);
-    animation-timing-function: linear;
-  }
-  12% {
-    transform: translateX(0);
-    animation-timing-function: cubic-bezier(0.45, 0, 0.85, 0.6);
-  }
-  46% {
-    transform: translateX(42%);
-    animation-timing-function: linear;
-  }
-  74% {
-    transform: translateX(94%);
-  }
-  80% {
-    transform: translateX(106%);
-  }
-  81%,
-  100% {
-    transform: translateX(0);
-  }
-}
-
-@keyframes plane-y {
-  0%,
-  44% {
-    transform: translateY(0);
-    opacity: 1;
-    animation-timing-function: cubic-bezier(0.4, 0, 0.7, 0.55);
-  }
-  74% {
-    transform: translateY(-135%);
-    opacity: 1;
-  }
-  80% {
-    transform: translateY(-185%);
-    opacity: 0;
-  }
-  81%,
-  90% {
-    transform: translateY(0);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes plane-pitch {
-  0%,
-  41% {
-    transform: rotate(0deg);
-  }
-  52%,
-  76% {
-    transform: rotate(-16deg);
-  }
-  81%,
-  100% {
-    transform: rotate(0deg);
-  }
-}
-
-@keyframes plane-trail {
-  0%,
-  26% {
-    opacity: 0;
-    transform: scaleX(0.15);
-  }
-  50% {
-    opacity: 0.9;
-    transform: scaleX(1);
-  }
-  72% {
-    opacity: 0.45;
-    transform: scaleX(1);
-  }
-  78%,
-  100% {
-    opacity: 0;
-    transform: scaleX(0.15);
-  }
-}
-
-@keyframes plane-shadow {
-  0%,
-  42% {
-    opacity: 0.8;
-    transform: scale(1);
-  }
-  62% {
-    opacity: 0;
-    transform: scale(0.55);
-  }
-  81%,
-  92% {
-    opacity: 0;
-    transform: scale(0.55);
-  }
-  100% {
-    opacity: 0.8;
-    transform: scale(1);
-  }
-}
-
-/* ZB101 flips to Departed as the wheels leave the ground */
-.board-row em.status-swap {
-  display: inline-grid;
-  justify-items: end;
-  animation: none;
-}
-
-.status-swap i {
-  grid-area: 1 / 1;
-  font-style: normal;
-  white-space: nowrap;
-}
-
-.status-swap i:first-child {
-  animation: status-a 7.5s steps(1) infinite;
-}
-
-.status-swap i:last-child {
-  opacity: 0;
-  color: var(--violet);
-  animation: status-b 7.5s steps(1) infinite;
-}
-
-@keyframes status-a {
-  0%,
-  49% { opacity: 1; }
-  50%,
-  92% { opacity: 0; }
-  93%,
-  100% { opacity: 1; }
-}
-
-@keyframes status-b {
-  0%,
-  49% { opacity: 0; }
-  50%,
-  92% { opacity: 1; }
-  93%,
-  100% { opacity: 0; }
-}
-
-/* the other rows keep breathing like a live departures board */
 .board-row em {
   animation: status-breathe 3.4s ease-in-out infinite;
 }
@@ -1226,202 +937,7 @@ img {
   50% { opacity: 0.55; }
 }
 
-/* --- 02 social network: the conversation plays out --- */
-
-/* the typing indicator and the reply it turns into share one slot */
-.chat-slot {
-  display: grid;
-  justify-items: start;
-}
-
-.chat-slot > * {
-  grid-area: 1 / 1;
-}
-
-.chat-seen {
-  align-self: flex-end;
-  margin-top: -8px;
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-}
-
-.board-chat .chat-bubble {
-  transform-origin: bottom left;
-}
-
-.board-chat .chat-bubble.out {
-  transform-origin: bottom right;
-}
-
-.m1 { animation: chat-m1 11s cubic-bezier(0.16, 1, 0.3, 1) infinite; }
-.m2 { animation: chat-m2 11s cubic-bezier(0.16, 1, 0.3, 1) infinite; }
-
-.m3 {
-  opacity: 0;
-  animation: chat-m3 11s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-}
-
-.chat-seen {
-  opacity: 0;
-  animation: chat-seen 11s ease infinite;
-}
-
-.chat-slot .chat-typing {
-  opacity: 0;
-  animation: chat-typing-cycle 11s ease infinite;
-}
-
-@keyframes chat-m1 {
-  0%, 4% { opacity: 0; transform: translateY(10px) scale(0.94); }
-  10%, 90% { opacity: 1; transform: none; }
-  96%, 100% { opacity: 0; transform: translateY(10px) scale(0.94); }
-}
-
-@keyframes chat-m2 {
-  0%, 22% { opacity: 0; transform: translateY(10px) scale(0.94); }
-  28%, 90% { opacity: 1; transform: none; }
-  96%, 100% { opacity: 0; transform: translateY(10px) scale(0.94); }
-}
-
-@keyframes chat-m3 {
-  0%, 56% { opacity: 0; transform: translateY(10px) scale(0.94); }
-  62%, 90% { opacity: 1; transform: none; }
-  96%, 100% { opacity: 0; transform: translateY(10px) scale(0.94); }
-}
-
-@keyframes chat-seen {
-  0%, 34% { opacity: 0; }
-  40%, 90% { opacity: 1; }
-  96%, 100% { opacity: 0; }
-}
-
-@keyframes chat-typing-cycle {
-  0%, 43% { opacity: 0; }
-  46%, 55% { opacity: 1; }
-  58%, 100% { opacity: 0; }
-}
-
-/* the header status follows whoever is typing */
-.chat-header em.chat-state {
-  display: inline-grid;
-  justify-items: end;
-}
-
-.chat-state i {
-  grid-area: 1 / 1;
-  font-style: normal;
-  white-space: nowrap;
-  animation: chat-state-a 11s steps(1) infinite;
-}
-
-.chat-state i:last-child {
-  opacity: 0;
-  color: var(--ink-dim);
-  animation: chat-state-b 11s steps(1) infinite;
-}
-
-@keyframes chat-state-a {
-  0%, 44% { opacity: 1; }
-  45%, 56% { opacity: 0; }
-  57%, 100% { opacity: 1; }
-}
-
-@keyframes chat-state-b {
-  0%, 44% { opacity: 0; }
-  45%, 56% { opacity: 1; }
-  57%, 100% { opacity: 0; }
-}
-
-.status-dot {
-  position: relative;
-}
-
-.status-dot::after {
-  content: "";
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  border: 1px solid var(--accent);
-  opacity: 0;
-  animation: dot-ring 2.6s ease-out infinite;
-}
-
-@keyframes dot-ring {
-  0% { opacity: 0.7; transform: scale(0.5); }
-  70%, 100% { opacity: 0; transform: scale(1.4); }
-}
-
-/* --- 03 discipline manager: the semester fills in --- */
-
-.grade-row > i::after {
-  animation:
-    grade-shimmer 3.2s linear infinite,
-    grade-fill 7s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-}
-
-@keyframes grade-fill {
-  0% { width: 0; opacity: 0; }
-  8% { opacity: 1; }
-  40%, 86% { width: var(--w, 100%); opacity: 1; }
-  93% { width: var(--w, 100%); opacity: 0; }
-  94%, 100% { width: 0; opacity: 0; }
-}
-
-/* each mark rolls up as its bar lands */
-.grade-row em,
-.grades-foot em {
-  display: inline-block;
-  overflow: hidden;
-  line-height: 1.35;
-  vertical-align: bottom;
-}
-
-.grade-row em i,
-.grades-foot em i {
-  display: block;
-  font-style: normal;
-  animation: grade-roll 7s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-}
-
-.grade-row:nth-child(3) em i { animation-delay: 0.4s; }
-.grade-row:nth-child(4) em i { animation-delay: 0.8s; }
-.grade-row:nth-child(5) em i { animation-delay: 1.2s; }
-.grades-foot em i { animation-delay: 1.6s; }
-
-@keyframes grade-roll {
-  0%, 6% { transform: translateY(115%); opacity: 0; }
-  26%, 88% { transform: none; opacity: 1; }
-  93%, 100% { transform: translateY(-115%); opacity: 0; }
-}
-
-.grades-foot {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  padding-top: 14px;
-  border-top: 1px solid var(--line);
-}
-
-.grades-foot b {
-  font-weight: 400;
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-}
-
-.grades-foot em {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: clamp(15px, 1.6vw, 20px);
-  color: var(--accent);
-}
-
-/* --- 04 e-shop: a cursor picks an item and drops it in the cart --- */
-
+/* 04 e-shop — thumbnails bob, cart badge pulses */
 .thumb svg {
   animation: thumb-bob 3.6s ease-in-out infinite;
 }
@@ -1435,303 +951,39 @@ img {
   50% { transform: translateY(-3px); }
 }
 
-/* the pointer: outer layer walks the board, inner layer clicks */
-.shop-pointer {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-  animation: cursor-move 9s cubic-bezier(0.55, 0, 0.2, 1) infinite;
-}
-
-.shop-pointer i {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: clamp(14px, 1.7vw, 20px);
-  color: var(--ink);
-  transform-origin: 12% 10%;
-  filter: drop-shadow(0 3px 7px rgba(0, 0, 0, 0.65));
-  animation: cursor-click 9s ease infinite;
-}
-
-.shop-pointer svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* click ripple */
-.shop-pointer i::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 30px;
-  height: 30px;
-  margin: -15px 0 0 -15px;
-  border-radius: 50%;
-  border: 1px solid var(--accent);
-  opacity: 0;
-  animation: cursor-ripple 9s ease-out infinite;
-}
-
-@keyframes cursor-move {
-  0%, 8% { transform: translate(30%, 84%); }
-  28%, 42% { transform: translate(69%, 34%); }
-  60%, 70% { transform: translate(85%, 7%); }
-  88%, 100% { transform: translate(30%, 84%); }
-}
-
-@keyframes cursor-click {
-  0%, 29% { transform: scale(1); }
-  32% { transform: scale(0.76); }
-  37%, 100% { transform: scale(1); }
-}
-
-@keyframes cursor-ripple {
-  0%, 30% { opacity: 0; transform: scale(0.2); }
-  33% { opacity: 0.9; transform: scale(0.45); }
-  46%, 100% { opacity: 0; transform: scale(1.5); }
-}
-
-/* the picked item arcs into the cart: x eases out, y eases in */
-.shop-fly {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  animation: fly-x 9s cubic-bezier(0.3, 0, 0.6, 1) infinite;
-}
-
-.shop-fly-y {
-  position: absolute;
-  inset: 0;
-  animation: fly-y 9s cubic-bezier(0.2, 0.85, 0.4, 1) infinite;
-}
-
-.shop-fly i {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: clamp(20px, 2.4vw, 28px);
-  aspect-ratio: 1;
-  border-radius: 8px;
-  color: #0a0a0c;
-  background: linear-gradient(135deg, rgba(200, 245, 73, 0.85), rgba(200, 245, 73, 0.35));
-  box-shadow: 0 6px 16px -6px rgba(200, 245, 73, 0.6);
-  opacity: 0;
-  animation: fly-pop 9s ease infinite;
-}
-
-.shop-fly svg {
-  width: 62%;
-  height: auto;
-}
-
-@keyframes fly-x {
-  0%, 35% { transform: translate(68%, 0); }
-  57%, 100% { transform: translate(85%, 0); }
-}
-
-@keyframes fly-y {
-  0%, 35% { transform: translate(0, 33%); }
-  57%, 100% { transform: translate(0, 6%); }
-}
-
-@keyframes fly-pop {
-  0%, 34% { opacity: 0; transform: scale(0.5); }
-  40% { opacity: 1; transform: scale(1); }
-  52% { opacity: 1; transform: scale(0.78); }
-  57%, 100% { opacity: 0; transform: scale(0.4); }
-}
-
-/* the card acknowledges the click */
-.sc-target {
-  animation: sc-added 9s ease infinite;
-}
-
-@keyframes sc-added {
-  0%, 30% {
-    transform: none;
-    border-color: var(--line);
-    box-shadow: none;
-  }
-  34% {
-    transform: scale(0.965);
-    border-color: rgba(200, 245, 73, 0.7);
-    box-shadow: 0 0 0 1px rgba(200, 245, 73, 0.45);
-  }
-  42%, 60% {
-    transform: none;
-    border-color: rgba(200, 245, 73, 0.7);
-    box-shadow: 0 0 0 1px rgba(200, 245, 73, 0.45);
-  }
-  70%, 100% {
-    transform: none;
-    border-color: var(--line);
-    box-shadow: none;
-  }
-}
-
-.added {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  padding: 3px 8px;
-  border-radius: 100px;
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #0a0a0c;
-  background: var(--accent);
-  opacity: 0;
-  animation: added-in 9s ease infinite;
-}
-
-@keyframes added-in {
-  0%, 33% { opacity: 0; transform: translateY(-5px) scale(0.9); }
-  39%, 62% { opacity: 1; transform: none; }
-  70%, 100% { opacity: 0; transform: translateY(-5px) scale(0.9); }
-}
-
-/* the cart total ticks over as the item lands */
 .shop-topbar em {
-  animation: cart-bump 9s ease infinite;
+  animation: cart-pulse 2.8s ease-in-out infinite;
 }
 
-@keyframes cart-bump {
-  0%, 54% { transform: scale(1); }
-  58% { transform: scale(1.14); }
-  66%, 100% { transform: scale(1); }
+@keyframes cart-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
 }
 
-.cart-n {
-  display: inline-grid;
-  justify-items: center;
-  vertical-align: bottom;
-}
-
-.cart-n i {
-  grid-area: 1 / 1;
-  font-style: normal;
-  animation: cart-a 9s steps(1) infinite;
-}
-
-.cart-n i:last-child {
-  opacity: 0;
-  animation: cart-b 9s steps(1) infinite;
-}
-
-@keyframes cart-a {
-  0%, 55% { opacity: 1; }
-  56%, 92% { opacity: 0; }
-  93%, 100% { opacity: 1; }
-}
-
-@keyframes cart-b {
-  0%, 55% { opacity: 0; }
-  56%, 92% { opacity: 1; }
-  93%, 100% { opacity: 0; }
-}
-
-/* --- 05 network: the /24 is carved up, then traffic flows --- */
-
+/* 05 network — a packet of light sweeps across the subnet map */
 .net-alloc {
-  position: relative;
-}
-
-.net-alloc i {
-  animation: alloc-carve 6.5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-}
-
-.net-alloc .s2 { animation-delay: 0.1s; }
-.net-alloc .s3 { animation-delay: 0.2s; }
-.net-alloc .s4 { animation-delay: 0.3s; }
-.net-alloc .s5 { animation-delay: 0.4s; }
-.net-alloc .s6 { animation-delay: 0.5s; }
-.net-alloc .s7 { animation-delay: 0.6s; }
-
-@keyframes alloc-carve {
-  0% { width: 0; opacity: 0; }
-  8% { opacity: 1; }
-  34%, 88% { width: var(--w); opacity: 1; }
-  94% { width: var(--w); opacity: 0; }
-  95%, 100% { width: 0; opacity: 0; }
-}
-
-/* a packet runs the length of every subnet row */
-.net-row {
   position: relative;
   overflow: hidden;
 }
 
-.net-row::after {
+.net-alloc::after {
   content: "";
   position: absolute;
-  left: 0;
+  top: 0;
   bottom: 0;
-  width: 24%;
-  height: 1px;
+  left: -25%;
+  width: 22%;
+  background: linear-gradient(90deg, transparent, rgba(244, 242, 238, 0.3), transparent);
+  pointer-events: none;
   opacity: 0;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  animation: net-hop 3.4s linear infinite;
+  animation: net-packet 3.6s linear infinite;
 }
 
-.net-row:nth-child(2)::after { animation-delay: 0.5s; }
-.net-row:nth-child(3)::after { animation-delay: 1s; }
-.net-row:nth-child(4)::after { animation-delay: 1.5s; }
-
-@keyframes net-hop {
-  0% { transform: translateX(-100%); opacity: 0; }
-  12%, 80% { opacity: 0.75; }
-  100% { transform: translateX(420%); opacity: 0; }
-}
-
-/* the label cycles through what the topology actually runs */
-.net-head em.net-cycle {
-  display: inline-grid;
-  justify-items: end;
-}
-
-.net-cycle i {
-  grid-area: 1 / 1;
-  font-style: normal;
-  white-space: nowrap;
-}
-
-.net-cycle i:nth-child(1) { animation: net-cyc-a 9s ease infinite; }
-
-.net-cycle i:nth-child(2) {
-  opacity: 0;
-  animation: net-cyc-b 9s ease infinite;
-}
-
-.net-cycle i:nth-child(3) {
-  opacity: 0;
-  animation: net-cyc-c 9s ease infinite;
-}
-
-@keyframes net-cyc-a {
-  0%, 27% { opacity: 1; }
-  33%, 94% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-@keyframes net-cyc-b {
-  0%, 27% { opacity: 0; }
-  33%, 60% { opacity: 1; }
-  66%, 100% { opacity: 0; }
-}
-
-@keyframes net-cyc-c {
-  0%, 60% { opacity: 0; }
-  66%, 94% { opacity: 1; }
-  100% { opacity: 0; }
+@keyframes net-packet {
+  0% { left: -25%; opacity: 0; }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
 }
 
 /* --- vulnforge: exploit terminal --- */
@@ -2161,17 +1413,6 @@ img {
 
   .about-grid {
     grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 560px) {
-  .media-board {
-    aspect-ratio: auto;
-    padding: 18px;
-  }
-
-  .runway {
-    min-height: 88px;
   }
 }
 
