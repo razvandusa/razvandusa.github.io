@@ -111,7 +111,7 @@ img {
   .sec-type,
   .sec-caret,
   .sec-ok,
-  .sec-vuln i {
+  .sec-ok2 {
     animation: none !important;
   }
 
@@ -1025,44 +1025,20 @@ img {
   88%, 100% { opacity: 0; }
 }
 
-/* vulnerability scan: each dot flips detected -> patched in a moving wave */
-.sec-scanlist {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+/* second (post-exploitation) log line, flashes in just after the first */
+.sec-ok2,
+.sec-ok2 i {
+  color: var(--danger);
 }
 
-.sec-vuln {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 6px 12px;
-  border: 1px solid var(--line);
-  border-radius: 100px;
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ink-dim);
+.sec-ok2 {
+  animation: sec-appear2 5s ease infinite;
 }
 
-.sec-vuln i {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 8px 1px rgba(200, 245, 73, 0.55);
-  animation: sec-flip 2.8s ease-in-out infinite;
-}
-
-.sec-vuln:nth-child(2) i { animation-delay: 0.18s; }
-.sec-vuln:nth-child(3) i { animation-delay: 0.36s; }
-.sec-vuln:nth-child(4) i { animation-delay: 0.54s; }
-.sec-vuln:nth-child(5) i { animation-delay: 0.72s; }
-
-@keyframes sec-flip {
-  0%, 100% { background: var(--accent); box-shadow: 0 0 8px 1px rgba(200, 245, 73, 0.55); }
-  30%, 55% { background: var(--danger); box-shadow: 0 0 10px 1px rgba(255, 84, 104, 0.7); }
+@keyframes sec-appear2 {
+  0%, 46% { opacity: 0; transform: translateY(2px); }
+  56%, 82% { opacity: 1; transform: none; }
+  88%, 100% { opacity: 0; }
 }
 
 /* matrix rain canvas */
@@ -1082,8 +1058,7 @@ img {
 .sec-scan { z-index: 2; }
 
 .board-sec .sec-head,
-.board-sec .sec-term,
-.board-sec .sec-scanlist {
+.board-sec .sec-term {
   z-index: 1;
 }
 
