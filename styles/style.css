@@ -107,7 +107,6 @@ img {
   .marquee-track,
   .chat-typing i,
   .pulse-dot,
-  .sec-scan::before,
   .sec-type,
   .sec-caret,
   .sec-ok,
@@ -903,31 +902,6 @@ img {
     #0b0d0a;
 }
 
-/* CRT scanline sweeping down the console */
-.sec-scan {
-  position: absolute;
-  inset: 0;
-  border-radius: 8px;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.sec-scan::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: -6%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(200, 245, 73, 0.5), transparent);
-  animation: sec-sweep 3.8s linear infinite;
-}
-
-@keyframes sec-sweep {
-  0% { top: -6%; }
-  100% { top: 106%; }
-}
-
 .sec-head {
   position: relative;
   display: flex;
@@ -1054,8 +1028,6 @@ img {
   -webkit-mask-image: linear-gradient(180deg, transparent, #000 14%, #000 82%, transparent);
           mask-image: linear-gradient(180deg, transparent, #000 14%, #000 82%, transparent);
 }
-
-.sec-scan { z-index: 2; }
 
 .board-sec .sec-head,
 .board-sec .sec-term {
