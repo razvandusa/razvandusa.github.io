@@ -106,7 +106,12 @@ img {
   }
   .marquee-track,
   .chat-typing i,
-  .pulse-dot {
+  .pulse-dot,
+  .sec-scan::before,
+  .sec-type,
+  .sec-caret,
+  .sec-ok,
+  .sec-vuln i {
     animation: none !important;
   }
 }
@@ -882,17 +887,44 @@ img {
   color: var(--ink-faint);
 }
 
-/* --- vulnforge: security console --- */
+/* --- vulnforge: exploit terminal --- */
 
 .board-sec {
+  --danger: #ff5468;
   gap: 16px;
   background:
     radial-gradient(420px 300px at 85% 8%, rgba(124, 108, 255, 0.2), transparent 70%),
-    radial-gradient(360px 260px at 10% 95%, rgba(200, 245, 73, 0.12), transparent 70%),
-    #0d0d12;
+    radial-gradient(360px 260px at 8% 95%, rgba(200, 245, 73, 0.12), transparent 70%),
+    #0b0d0a;
+}
+
+/* CRT scanline sweeping down the console */
+.sec-scan {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.sec-scan::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -6%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(200, 245, 73, 0.5), transparent);
+  animation: sec-sweep 3.8s linear infinite;
+}
+
+@keyframes sec-sweep {
+  0% { top: -6%; }
+  100% { top: 106%; }
 }
 
 .sec-head {
+  position: relative;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -909,20 +941,21 @@ img {
 }
 
 .sec-head em {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
   font-style: normal;
   font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  letter-spacing: 0.08em;
   color: var(--accent);
 }
 
 .sec-term {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 9px;
   padding: 14px 16px;
   border-radius: 8px;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.4);
   border: 1px solid var(--line);
   font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
   font-size: clamp(11px, 1.15vw, 14px);
@@ -933,6 +966,7 @@ img {
   align-items: baseline;
   gap: 8px;
   color: var(--ink-dim);
+  white-space: nowrap;
 }
 
 .sec-line i {
@@ -941,31 +975,60 @@ img {
   font-weight: 700;
 }
 
-.sec-line b {
-  color: var(--ink);
-  font-weight: 600;
+/* the injection payload types itself out */
+.sec-type {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: bottom;
+  width: 19ch;
+  color: var(--danger);
+  animation: sec-typing 5s steps(19) infinite;
 }
 
-.sec-line u {
-  text-decoration: none;
+@keyframes sec-typing {
+  0% { width: 0; }
+  30% { width: 19ch; }
+  86% { width: 19ch; }
+  88% { width: 0; }
+  100% { width: 0; }
+}
+
+.sec-caret {
   color: var(--accent);
-  background: var(--accent-soft);
-  padding: 1px 6px;
-  border-radius: 5px;
+  animation: sec-blink 1s steps(1) infinite;
 }
 
+@keyframes sec-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* result line flashes in once the payload lands */
 .sec-ok,
 .sec-ok i {
   color: var(--accent);
 }
 
-.sec-list {
+.sec-ok {
+  animation: sec-appear 5s ease infinite;
+}
+
+@keyframes sec-appear {
+  0%, 34% { opacity: 0; transform: translateY(2px); }
+  44%, 82% { opacity: 1; transform: none; }
+  88%, 100% { opacity: 0; }
+}
+
+/* vulnerability scan: each dot flips detected -> patched in a moving wave */
+.sec-scanlist {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
 
-.sec-chip {
+.sec-vuln {
   display: inline-flex;
   align-items: center;
   gap: 7px;
@@ -978,12 +1041,23 @@ img {
   color: var(--ink-dim);
 }
 
-.sec-chip i {
+.sec-vuln i {
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background: var(--accent);
   box-shadow: 0 0 8px 1px rgba(200, 245, 73, 0.55);
+  animation: sec-flip 2.8s ease-in-out infinite;
+}
+
+.sec-vuln:nth-child(2) i { animation-delay: 0.18s; }
+.sec-vuln:nth-child(3) i { animation-delay: 0.36s; }
+.sec-vuln:nth-child(4) i { animation-delay: 0.54s; }
+.sec-vuln:nth-child(5) i { animation-delay: 0.72s; }
+
+@keyframes sec-flip {
+  0%, 100% { background: var(--accent); box-shadow: 0 0 8px 1px rgba(200, 245, 73, 0.55); }
+  30%, 55% { background: var(--danger); box-shadow: 0 0 10px 1px rgba(255, 84, 104, 0.7); }
 }
 
 .project-index {
