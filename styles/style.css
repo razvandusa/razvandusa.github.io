@@ -107,6 +107,12 @@ img {
   .marquee-track,
   .chat-typing i,
   .pulse-dot,
+  .board-icon,
+  .board-row em,
+  .grade-row i::after,
+  .thumb svg,
+  .shop-topbar em,
+  .net-alloc::after,
   .sec-type,
   .sec-caret,
   .sec-ok,
@@ -686,8 +692,23 @@ img {
   position: absolute;
   inset: 0;
   width: var(--w, 100%);
-  background: var(--accent);
+  background:
+    linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.5) 50%, transparent 100%),
+    var(--accent);
+  background-size: 45% 100%, 100% 100%;
+  background-repeat: no-repeat;
+  background-position: -60% 0, 0 0;
   border-radius: 100px;
+  animation: grade-shimmer 3.2s linear infinite;
+}
+
+.grade-row:nth-child(3) i::after { animation-delay: 0.5s; }
+.grade-row:nth-child(4) i::after { animation-delay: 1s; }
+.grade-row:nth-child(5) i::after { animation-delay: 1.5s; }
+
+@keyframes grade-shimmer {
+  0% { background-position: -60% 0, 0 0; }
+  100% { background-position: 160% 0, 0 0; }
 }
 
 .grade-row em {
@@ -889,6 +910,80 @@ img {
 
 .net-row:last-child em {
   color: var(--ink-faint);
+}
+
+/* ---------- subtle motion on the remaining boards ---------- */
+
+/* 01 airline — plane drifts, statuses breathe like a live board */
+.board-icon {
+  animation: fly-float 4.5s ease-in-out infinite;
+}
+
+@keyframes fly-float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(4px, -4px); }
+}
+
+.board-row em {
+  animation: status-breathe 3.4s ease-in-out infinite;
+}
+
+.board-row:nth-child(2) em { animation-delay: 0.5s; }
+.board-row:nth-child(3) em { animation-delay: 1s; }
+.board-row:nth-child(4) em { animation-delay: 1.5s; }
+
+@keyframes status-breathe {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+/* 04 e-shop — thumbnails bob, cart badge pulses */
+.thumb svg {
+  animation: thumb-bob 3.6s ease-in-out infinite;
+}
+
+.shop-card:nth-child(2) .thumb svg { animation-delay: 0.45s; }
+.shop-card:nth-child(3) .thumb svg { animation-delay: 0.9s; }
+.shop-card:nth-child(4) .thumb svg { animation-delay: 1.35s; }
+
+@keyframes thumb-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.shop-topbar em {
+  animation: cart-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes cart-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+/* 05 network — a packet of light sweeps across the subnet map */
+.net-alloc {
+  position: relative;
+  overflow: hidden;
+}
+
+.net-alloc::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -25%;
+  width: 22%;
+  background: linear-gradient(90deg, transparent, rgba(244, 242, 238, 0.3), transparent);
+  pointer-events: none;
+  opacity: 0;
+  animation: net-packet 3.6s linear infinite;
+}
+
+@keyframes net-packet {
+  0% { left: -25%; opacity: 0; }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
 }
 
 /* --- vulnforge: exploit terminal --- */
