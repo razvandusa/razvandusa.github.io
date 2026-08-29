@@ -107,12 +107,23 @@ img {
   .marquee-track,
   .chat-typing i,
   .pulse-dot,
-  .board-icon,
+  .plane,
+  .plane::before,
+  .t-beacon,
   .board-row em,
-  .grade-row i::after,
+  .board-row .flip-lines i,
+  .grade-row > i::after,
+  .hit,
   .thumb svg,
   .shop-topbar em,
-  .net-alloc::after,
+  .shop-pointer,
+  .shop-pointer svg,
+  .shop-pointer::after,
+  .shop-card,
+  .shop-fly,
+  .cart-count i,
+  .net-alloc i,
+  .roll i,
   .sec-type,
   .sec-caret,
   .sec-ok,
@@ -488,6 +499,23 @@ img {
   opacity: 0.5;
 }
 
+/* a one-line window that rolls through a strip of values. Used by the subnet
+   map and the grade board; each supplies its own @keyframes and stop list. */
+.roll {
+  display: inline-block;
+  height: 1em;
+  overflow: hidden;
+  vertical-align: -0.2em;
+}
+
+.roll i {
+  display: block;
+  height: 1em;
+  line-height: 1;
+  font-style: normal;
+  white-space: nowrap;
+}
+
 /* stylized mini-UI graphics — one themed board per project */
 .media-board {
   position: relative;
@@ -505,10 +533,85 @@ img {
     #0d0d12;
 }
 
+/* the icon slot is now a strip of sky the jet takes off across */
 .board-icon {
-  font-size: clamp(36px, 4vw, 56px);
-  line-height: 1;
+  position: relative;
+  height: clamp(56px, 7vw, 88px);
+  overflow: hidden;
   color: var(--accent);
+}
+
+.plane {
+  position: absolute;
+  left: 0;
+  bottom: 16%;
+  z-index: 2;
+  width: clamp(38px, 4.6vw, 62px);
+}
+
+.plane svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* vapour streak, drawn behind the tail so it inherits the plane's pitch */
+.plane::before {
+  content: "";
+  position: absolute;
+  right: 88%;
+  top: 44%;
+  width: 170%;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, rgba(200, 245, 73, 0), rgba(200, 245, 73, 0.5));
+  transform-origin: right center;
+  opacity: 0;
+}
+
+/* control tower, stood past the runway threshold. Dimmed so it reads as
+   scenery and leaves the accent colour to the jet. */
+.tower {
+  position: absolute;
+  left: 76%;
+  bottom: 13%;
+  z-index: 1;
+  width: clamp(20px, 2.4vw, 32px);
+}
+
+.tower svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.t-body {
+  fill: rgba(244, 242, 238, 0.26);
+}
+
+.t-glass {
+  fill: rgba(200, 245, 73, 0.22);
+}
+
+.t-beacon {
+  fill: var(--accent);
+  opacity: 0.85;
+  filter: drop-shadow(0 0 4px rgba(200, 245, 73, 0.7));
+}
+
+.runway {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 13%;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(244, 242, 238, 0.22) 0 14px,
+    transparent 14px 30px
+  );
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 58%, transparent 86%);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 58%, transparent 86%);
 }
 
 .board-rows {
@@ -548,6 +651,23 @@ img {
 
 .board-row:last-child em {
   color: var(--ink-faint);
+}
+
+/* one-line window over a Boarding / Departed / Boarding strip */
+.board-row .flip-lines {
+  display: inline-block;
+  height: 1em;
+  overflow: hidden;
+  vertical-align: -0.2em;
+  color: inherit;
+  font-weight: inherit;
+}
+
+.board-row .flip-lines i {
+  display: block;
+  height: 1em;
+  line-height: 1;
+  font-style: normal;
 }
 
 /* --- social-network: chat window --- */
@@ -655,6 +775,10 @@ img {
 }
 
 .grades-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
   font-family: var(--display);
   font-weight: 700;
   font-size: 13px;
@@ -663,6 +787,12 @@ img {
   color: var(--ink-dim);
   padding-bottom: 14px;
   border-bottom: 1px solid var(--line);
+}
+
+.grades-title em {
+  font-style: normal;
+  white-space: nowrap;
+  color: var(--accent);
 }
 
 .grade-row {
@@ -678,16 +808,38 @@ img {
   color: var(--ink-dim);
 }
 
-.grade-row i {
+/* The child combinator is load-bearing: as a descendant selector this also
+   matched the <i> lines inside .roll, painting every grade digit as a bar.
+   No overflow clip here — the incoming scores are absolute children of the
+   track and have to fly in from outside it. The fill carries its own
+   border-radius, so nothing needed the clip anyway. */
+.grade-row > i {
   display: block;
   height: 6px;
   border-radius: 100px;
   background: rgba(244, 242, 238, 0.08);
   position: relative;
-  overflow: hidden;
 }
 
-.grade-row i::after {
+/* a score thrown at the bar */
+.hit {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  z-index: 1;
+  margin-top: -0.5em;
+  font-family: var(--display);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.05em;
+  line-height: 1;
+  color: var(--accent);
+  text-shadow: 0 0 10px rgba(200, 245, 73, 0.55);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.grade-row > i::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -699,12 +851,7 @@ img {
   background-repeat: no-repeat;
   background-position: -60% 0, 0 0;
   border-radius: 100px;
-  animation: grade-shimmer 3.2s linear infinite;
 }
-
-.grade-row:nth-child(3) i::after { animation-delay: 0.5s; }
-.grade-row:nth-child(4) i::after { animation-delay: 1s; }
-.grade-row:nth-child(5) i::after { animation-delay: 1.5s; }
 
 @keyframes grade-shimmer {
   0% { background-position: -60% 0, 0 0; }
@@ -715,6 +862,7 @@ img {
   font-style: normal;
   font-family: var(--display);
   font-weight: 700;
+  text-align: right;
   color: var(--accent);
 }
 
@@ -799,6 +947,84 @@ img {
   width: auto;
 }
 
+/* rolling cart counter: a 1-digit window over a 3 / 4 / 3 strip */
+.cart-count {
+  display: inline-block;
+  height: 1em;
+  overflow: hidden;
+  vertical-align: -0.2em;
+}
+
+.cart-count i {
+  display: block;
+  height: 1em;
+  line-height: 1;
+  font-style: normal;
+}
+
+/* the grid is the stage the fake cursor moves across */
+.shop-grid {
+  position: relative;
+}
+
+.shop-pointer {
+  position: absolute;
+  left: 20%;
+  top: 85%;
+  z-index: 3;
+  width: clamp(13px, 1.5vw, 18px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.shop-pointer svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  fill: #f4f2ee;
+  transform-origin: top left;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.55));
+}
+
+/* click ripple, centred on the pointer tip */
+.shop-pointer::after {
+  content: "";
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+/* the "+1" that leaves the product and lands in the cart */
+.shop-fly {
+  position: absolute;
+  left: var(--fx);
+  top: var(--fy);
+  z-index: 3;
+  font-style: normal;
+  font-family: var(--display);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  color: #0a0a0c;
+  background: var(--accent);
+  padding: 4px 7px;
+  border-radius: 100px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* each chip launches from the tile it belongs to */
+.shop-fly.f1 { --fx: 20%; --fy: 24%; }
+.shop-fly.f2 { --fx: 70%; --fy: 24%; }
+.shop-fly.f3 { --fx: 20%; --fy: 74%; }
+.shop-fly.f4 { --fx: 70%; --fy: 74%; }
+
 .t1 { background: linear-gradient(135deg, rgba(124, 108, 255, 0.5), rgba(124, 108, 255, 0.15)); }
 .t2 { background: linear-gradient(135deg, rgba(200, 245, 73, 0.45), rgba(200, 245, 73, 0.12)); }
 .t3 { background: linear-gradient(135deg, rgba(244, 242, 238, 0.3), rgba(244, 242, 238, 0.08)); }
@@ -844,6 +1070,7 @@ img {
   display: flex;
   gap: 3px;
   height: clamp(24px, 3.2vw, 34px);
+  overflow: hidden;
 }
 
 .net-alloc i {
@@ -900,11 +1127,16 @@ img {
   font-weight: 300;
 }
 
+/* the auto column is sized by the widest value any row can roll to (126 HOSTS)
+   and sits flush to the board's right edge, so these have to align right --
+   left-aligned, every shorter value drifts off that edge. text-align inherits
+   down into .roll and its lines, so this one declaration covers both. */
 .net-row em {
   font-style: normal;
   font-size: 0.85em;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  text-align: right;
   color: var(--accent);
 }
 
@@ -912,20 +1144,102 @@ img {
   color: var(--ink-faint);
 }
 
+/* .net-row span otherwise dims the copy nested inside .net-row em */
+.net-row .roll {
+  color: inherit;
+  font-weight: inherit;
+}
+
 /* ---------- subtle motion on the remaining boards ---------- */
 
-/* 01 airline — plane drifts, statuses breathe like a live board */
-.board-icon {
-  animation: fly-float 4.5s ease-in-out infinite;
+/* 01 airline — the jet rolls, rotates and climbs away on a 7s loop, and the
+   ZB101 row flips to Departed on the same beat it leaves the ground. Each
+   keyframe carries its own timing function: the take-off roll accelerates,
+   everything after it is linear so the climb stays steady. */
+.plane {
+  animation: plane-takeoff 7s linear infinite;
 }
 
-@keyframes fly-float {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(4px, -4px); }
+@keyframes plane-takeoff {
+  /* taxi on from the left */
+  0% {
+    left: -14%; bottom: 16%; opacity: 0;
+    transform: rotate(0deg) scale(1);
+  }
+  6%, 14% {
+    left: -6%; bottom: 16%; opacity: 1;
+    transform: rotate(0deg) scale(1);
+    animation-timing-function: cubic-bezier(0.55, 0, 0.9, 0.55);
+  }
+  /* take-off roll, still on the wheels */
+  36% {
+    left: 30%; bottom: 16%; opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+  /* rotate: nose up, wheels leave the line */
+  44% {
+    left: 45%; bottom: 21%; opacity: 1;
+    transform: rotate(-11deg) scale(0.97);
+  }
+  /* climb out — shrinking as it goes reads as distance, and keeps the jet
+     clear of the lane's top edge until it has already faded */
+  56% {
+    left: 62%; bottom: 40%; opacity: 1;
+    transform: rotate(-16deg) scale(0.88);
+  }
+  68% {
+    left: 80%; bottom: 62%; opacity: 0.7;
+    transform: rotate(-16deg) scale(0.72);
+  }
+  78% {
+    left: 98%; bottom: 88%; opacity: 0;
+    transform: rotate(-16deg) scale(0.58);
+  }
+  /* out of frame: coast back to the start while invisible */
+  86%, 100% {
+    left: 108%; bottom: 110%; opacity: 0;
+    transform: rotate(-16deg) scale(0.5);
+  }
 }
 
+/* vapour only once the wheels are up */
+.plane::before {
+  animation: plane-trail 7s ease-out infinite;
+}
+
+@keyframes plane-trail {
+  0%, 42% { opacity: 0; transform: scaleX(0.15); }
+  54% { opacity: 0.7; transform: scaleX(1); }
+  66% { opacity: 0.4; transform: scaleX(1); }
+  74%, 100% { opacity: 0; transform: scaleX(1); }
+}
+
+.board-row .flip-lines i {
+  animation: status-flip 7s ease-in-out infinite;
+}
+
+@keyframes status-flip {
+  0%, 44% { transform: translateY(0); }
+  49%, 90% { transform: translateY(-1em); }
+  95%, 100% { transform: translateY(-2em); }
+}
+
+/* rotating beacon: two sweeps per 3.5s, i.e. four per take-off loop */
+.t-beacon {
+  animation: tower-beacon 3.5s ease-in-out infinite;
+}
+
+@keyframes tower-beacon {
+  0%, 18% { opacity: 0.2; }
+  25% { opacity: 1; }
+  32%, 68% { opacity: 0.2; }
+  75% { opacity: 1; }
+  82%, 100% { opacity: 0.2; }
+}
+
+/* 3.5s is exactly half the take-off loop, so the pulse never drifts against it */
 .board-row em {
-  animation: status-breathe 3.4s ease-in-out infinite;
+  animation: status-breathe 3.5s ease-in-out infinite;
 }
 
 .board-row:nth-child(2) em { animation-delay: 0.5s; }
@@ -937,7 +1251,116 @@ img {
   50% { opacity: 0.55; }
 }
 
-/* 04 e-shop — thumbnails bob, cart badge pulses */
+/* 03 discipline manager — eight scores are thrown at the bars over 16s, one
+   every 2s. Each impact knocks its bar to a new length, rolls that row's grade,
+   and re-medians the header. Impact k lands at 7.5% + k*12.5% of the clock; the
+   projectiles are one shared flight offset by animation-delay.
+
+   Every row is hit twice and ends on the value it started with, so the loop
+   closes. The medians are the real medians of the four grades at each stop:
+
+     10  10  9  10  ->  10        7  9  10  8  ->  8.5
+      7  10  9  10  ->   9.5     10  9  10  8  ->  9.5
+      7   9  9  10  ->   9       10 10  10  8  ->  10
+      7   9 10  10  ->   9.5     10 10   9  8  ->  9.5   -> back to 10 */
+.hit {
+  animation: hit-fly 16s cubic-bezier(0.5, 0, 0.85, 0.4) infinite;
+}
+
+.grade-row:nth-child(2) .hit-a { animation-delay: 0s; }
+.grade-row:nth-child(3) .hit-a { animation-delay: 2s; }
+.grade-row:nth-child(4) .hit-a { animation-delay: 4s; }
+.grade-row:nth-child(5) .hit-a { animation-delay: 6s; }
+.grade-row:nth-child(2) .hit-b { animation-delay: 8s; }
+.grade-row:nth-child(3) .hit-b { animation-delay: 10s; }
+.grade-row:nth-child(4) .hit-b { animation-delay: 12s; }
+.grade-row:nth-child(5) .hit-b { animation-delay: 14s; }
+
+/* in from the upper right, accelerating, then absorbed into the bar */
+@keyframes hit-fly {
+  0% { opacity: 0; transform: translate(48px, -16px) scale(1.4); }
+  1.2% { opacity: 1; transform: translate(41px, -14px) scale(1.3); }
+  6% { opacity: 1; transform: translate(9px, -3px) scale(1.02); }
+  7.5% { opacity: 1; transform: translate(0, 0) scale(0.9); }
+  9% { opacity: 0; transform: translate(-5px, 1px) scale(0.45); }
+  10%, 100% { opacity: 0; transform: translate(48px, -16px) scale(1.4); }
+}
+
+/* bars: the brightness spike is the moment of contact, and the width overshoot
+   into it is the recoil. Each row changes only on the two beats that hit it. */
+.grade-row > i::after {
+  animation:
+    grade-shimmer 3.2s linear infinite,
+    bar-r1 16s cubic-bezier(0.2, 0.9, 0.3, 1) infinite;
+}
+
+.grade-row:nth-child(3) > i::after {
+  animation-name: grade-shimmer, bar-r2;
+  animation-delay: 0.5s, 0s;
+}
+.grade-row:nth-child(4) > i::after {
+  animation-name: grade-shimmer, bar-r3;
+  animation-delay: 1s, 0s;
+}
+.grade-row:nth-child(5) > i::after {
+  animation-name: grade-shimmer, bar-r4;
+  animation-delay: 1.5s, 0s;
+}
+
+@keyframes bar-r1 {
+  0%, 7.5% { width: 100%; filter: brightness(1); }
+  9% { width: 74%; filter: brightness(1.9); }
+  11%, 57.5% { width: 70%; filter: brightness(1); }
+  59% { width: 96%; filter: brightness(1.9); }
+  61%, 100% { width: 100%; filter: brightness(1); }
+}
+
+@keyframes bar-r2 {
+  0%, 20% { width: 100%; filter: brightness(1); }
+  21.5% { width: 94%; filter: brightness(1.9); }
+  23.5%, 70% { width: 90%; filter: brightness(1); }
+  71.5% { width: 98%; filter: brightness(1.9); }
+  73.5%, 100% { width: 100%; filter: brightness(1); }
+}
+
+@keyframes bar-r3 {
+  0%, 32.5% { width: 90%; filter: brightness(1); }
+  34% { width: 98%; filter: brightness(1.9); }
+  36%, 82.5% { width: 100%; filter: brightness(1); }
+  84% { width: 94%; filter: brightness(1.9); }
+  86%, 100% { width: 90%; filter: brightness(1); }
+}
+
+@keyframes bar-r4 {
+  0%, 45% { width: 100%; filter: brightness(1); }
+  46.5% { width: 84%; filter: brightness(1.9); }
+  48.5%, 95% { width: 80%; filter: brightness(1); }
+  96.5% { width: 96%; filter: brightness(1.9); }
+  98.5%, 100% { width: 100%; filter: brightness(1); }
+}
+
+/* the four grades and the header median all walk the same nine stops */
+.board-grades .roll i {
+  animation: grade-roll 16s cubic-bezier(0.2, 0.9, 0.3, 1) infinite;
+}
+
+@keyframes grade-roll {
+  0%, 7.5% { transform: translateY(0); }
+  10%, 20% { transform: translateY(-1em); }
+  22.5%, 32.5% { transform: translateY(-2em); }
+  35%, 45% { transform: translateY(-3em); }
+  47.5%, 57.5% { transform: translateY(-4em); }
+  60%, 70% { transform: translateY(-5em); }
+  72.5%, 82.5% { transform: translateY(-6em); }
+  85%, 95% { transform: translateY(-7em); }
+  97.5%, 100% { transform: translateY(-8em); }
+}
+
+/* 04 e-shop — a cursor tours the storefront, clicking a different item each
+   time and driving the cart counter up. Every part below runs on the same 18s
+   clock; the per-tile pieces are the *same* keyframes offset by a 4s delay,
+   which is what keeps the four beats in step. Beat order is 2, 3, 1, 4 so the
+   path never repeats the same hop twice. */
 .thumb svg {
   animation: thumb-bob 3.6s ease-in-out infinite;
 }
@@ -951,40 +1374,210 @@ img {
   50% { transform: translateY(-3px); }
 }
 
+/* the cursor stays on screen the whole loop, resting mid-board between hops */
+.shop-pointer {
+  animation: shop-travel 18s ease-in-out infinite;
+}
+
+@keyframes shop-travel {
+  0% { left: 49%; top: 49%; opacity: 1; }
+  7.8%, 22.2% { left: 72%; top: 30%; opacity: 1; }
+  30%, 44.4% { left: 22%; top: 82%; opacity: 1; }
+  52.2%, 66.7% { left: 22%; top: 30%; opacity: 1; }
+  74.4%, 88.9% { left: 72%; top: 82%; opacity: 1; }
+  96.7%, 100% { left: 49%; top: 49%; opacity: 1; }
+}
+
+.shop-pointer svg {
+  animation: shop-tap 18s ease-out infinite;
+}
+
+@keyframes shop-tap {
+  0%, 9.5% { transform: scale(1); }
+  10.5% { transform: scale(0.78); }
+  11.5%, 31.7% { transform: scale(1); }
+  32.7% { transform: scale(0.78); }
+  33.7%, 54% { transform: scale(1); }
+  55% { transform: scale(0.78); }
+  56%, 76.2% { transform: scale(1); }
+  77.2% { transform: scale(0.78); }
+  78.2%, 100% { transform: scale(1); }
+}
+
+.shop-pointer::after {
+  animation: shop-ripple 18s ease-out infinite;
+}
+
+@keyframes shop-ripple {
+  0%, 10% { opacity: 0; transform: scale(0.3); }
+  11% { opacity: 0.85; transform: scale(0.6); }
+  16% { opacity: 0; transform: scale(3.2); }
+  32% { opacity: 0; transform: scale(0.3); }
+  33.2% { opacity: 0.85; transform: scale(0.6); }
+  38.2% { opacity: 0; transform: scale(3.2); }
+  54.3% { opacity: 0; transform: scale(0.3); }
+  55.5% { opacity: 0.85; transform: scale(0.6); }
+  60.5% { opacity: 0; transform: scale(3.2); }
+  76.5% { opacity: 0; transform: scale(0.3); }
+  77.7% { opacity: 0.85; transform: scale(0.6); }
+  82.7% { opacity: 0; transform: scale(3.2); }
+  100% { opacity: 0; transform: scale(0.3); }
+}
+
+/* one lift-press-release, replayed on each tile as its turn comes round */
+.shop-card {
+  animation: shop-press 18s ease-out infinite;
+}
+
+.shop-card:nth-child(1) { animation-delay: 8s; }
+.shop-card:nth-child(2) { animation-delay: 0s; }
+.shop-card:nth-child(3) { animation-delay: 4s; }
+.shop-card:nth-child(4) { animation-delay: 12s; }
+
+@keyframes shop-press {
+  0%, 7% {
+    transform: translateY(0) scale(1);
+    border-color: var(--line);
+    background: rgba(244, 242, 238, 0.03);
+  }
+  9%, 10% {
+    transform: translateY(-3px) scale(1);
+    border-color: rgba(200, 245, 73, 0.45);
+    background: rgba(244, 242, 238, 0.07);
+  }
+  11% {
+    transform: translateY(0) scale(0.975);
+    border-color: rgba(200, 245, 73, 0.8);
+    background: rgba(200, 245, 73, 0.12);
+  }
+  12%, 19% {
+    transform: translateY(-3px) scale(1);
+    border-color: rgba(200, 245, 73, 0.45);
+    background: rgba(244, 242, 238, 0.07);
+  }
+  22%, 100% {
+    transform: translateY(0) scale(1);
+    border-color: var(--line);
+    background: rgba(244, 242, 238, 0.03);
+  }
+}
+
+/* shared flight path — the start point is read per-chip from --fx / --fy */
+.shop-fly {
+  animation: shop-fly 18s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.shop-fly.f1 { animation-delay: 8s; }
+.shop-fly.f2 { animation-delay: 0s; }
+.shop-fly.f3 { animation-delay: 4s; }
+.shop-fly.f4 { animation-delay: 12s; }
+
+@keyframes shop-fly {
+  0%, 10.5% { left: var(--fx); top: var(--fy); opacity: 0; transform: scale(0.5); }
+  12% { left: var(--fx); top: var(--fy); opacity: 1; transform: scale(1); }
+  16.5% { left: 91%; top: -10%; opacity: 1; transform: scale(0.9); }
+  18.5%, 100% { left: 91%; top: -10%; opacity: 0; transform: scale(0.6); }
+}
+
 .shop-topbar em {
-  animation: cart-pulse 2.8s ease-in-out infinite;
+  animation: cart-pop 18s ease-out infinite;
 }
 
-@keyframes cart-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.06); }
+@keyframes cart-pop {
+  0%, 15.5% { transform: scale(1); box-shadow: 0 0 0 0 rgba(200, 245, 73, 0); }
+  17.5% { transform: scale(1.16); box-shadow: 0 0 0 6px rgba(200, 245, 73, 0.18); }
+  21%, 37.7% { transform: scale(1); box-shadow: 0 0 0 0 rgba(200, 245, 73, 0); }
+  39.7% { transform: scale(1.16); box-shadow: 0 0 0 6px rgba(200, 245, 73, 0.18); }
+  43.2%, 59.9% { transform: scale(1); box-shadow: 0 0 0 0 rgba(200, 245, 73, 0); }
+  61.9% { transform: scale(1.16); box-shadow: 0 0 0 6px rgba(200, 245, 73, 0.18); }
+  65.4%, 82.1% { transform: scale(1); box-shadow: 0 0 0 0 rgba(200, 245, 73, 0); }
+  84.1% { transform: scale(1.16); box-shadow: 0 0 0 6px rgba(200, 245, 73, 0.18); }
+  87.6%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(200, 245, 73, 0); }
 }
 
-/* 05 network — a packet of light sweeps across the subnet map */
-.net-alloc {
-  position: relative;
-  overflow: hidden;
+/* 3 -> 4 -> 5 -> 6 -> 7, then a roll onto the strip's trailing 3 so the jump
+   back to the top of the loop is invisible */
+.cart-count i {
+  animation: cart-roll 18s ease-in-out infinite;
 }
 
-.net-alloc::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -25%;
-  width: 22%;
-  background: linear-gradient(90deg, transparent, rgba(244, 242, 238, 0.3), transparent);
-  pointer-events: none;
-  opacity: 0;
-  animation: net-packet 3.6s linear infinite;
+@keyframes cart-roll {
+  0%, 16.5% { transform: translateY(0); }
+  18.5%, 38.7% { transform: translateY(-1em); }
+  40.7%, 60.9% { transform: translateY(-2em); }
+  62.9%, 83.1% { transform: translateY(-3em); }
+  85.1%, 95% { transform: translateY(-4em); }
+  97%, 100% { transform: translateY(-5em); }
 }
 
-@keyframes net-packet {
-  0% { left: -25%; opacity: 0; }
-  12% { opacity: 1; }
-  88% { opacity: 1; }
-  100% { left: 100%; opacity: 0; }
+/* 05 network — the VLSM solver hunting for a fit. The bar cycles through four
+   legal carvings of the /24 and lands back on the real one:
+
+     A  the shipped answer   free 18.75%
+     D  too greedy           free 0%      (no headroom at all)
+     C  too cautious         free 31.25%  (a third of the block wasted)
+     B  closer               free 6.25%
+
+   Only s1, s2, s3 and the free-space block resize; s4-s6 keep their prefix and
+   slide purely because the blocks ahead of them moved. Every state is a valid
+   largest-first allocation, so the widths and the host counts below stay
+   honest to each other. Order is A D C B A -- the repeat of A closes the loop.
+   Every animation below shares this 12s clock and these stop percentages. */
+.net-alloc i {
+  animation-duration: 12s;
+  animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+  animation-iteration-count: infinite;
 }
+
+/* a small stagger, so each transition ripples left to right instead of
+   every block snapping at once */
+.net-alloc .s1 { animation-name: net-s1; }
+.net-alloc .s2 { animation-name: net-s2; animation-delay: 0.05s; }
+.net-alloc .s3 { animation-name: net-s3; animation-delay: 0.1s; }
+.net-alloc .s7 { animation-name: net-s7; animation-delay: 0.15s; }
+
+@keyframes net-s1 {
+  0%, 14% { width: 25%; }
+  20%, 32% { width: 50%; }
+  38%, 50% { width: 25%; }
+  56%, 68% { width: 50%; }
+  74%, 100% { width: 25%; }
+}
+
+@keyframes net-s2 {
+  0%, 32% { width: 25%; }
+  38%, 68% { width: 12.5%; }
+  74%, 100% { width: 25%; }
+}
+
+@keyframes net-s3 {
+  0%, 14% { width: 12.5%; }
+  20%, 32% { width: 6.25%; }
+  38%, 100% { width: 12.5%; }
+}
+
+/* free space swings hardest: 18.75 -> 0 -> 31.25 -> 6.25 -> 18.75 */
+@keyframes net-s7 {
+  0%, 14% { width: 18.75%; }
+  20%, 32% { width: 0%; }
+  38%, 50% { width: 31.25%; }
+  56%, 68% { width: 6.25%; }
+  74%, 100% { width: 18.75%; }
+}
+
+/* every strip walks the same five stops, so one keyframes block drives all six */
+.net-row .roll i {
+  animation: net-roll 12s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes net-roll {
+  0%, 14% { transform: translateY(0); }
+  20%, 32% { transform: translateY(-1em); }
+  38%, 50% { transform: translateY(-2em); }
+  56%, 68% { transform: translateY(-3em); }
+  74%, 100% { transform: translateY(-4em); }
+}
+
 
 /* --- vulnforge: exploit terminal --- */
 
