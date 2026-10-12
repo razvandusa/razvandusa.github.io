@@ -67,6 +67,22 @@ img {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/* animated light rays behind the whole page (scripts/rays.js) */
+.rays {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+
+.rays.is-ready {
+  opacity: 1;
+}
+
 /* ---------- centered content column ---------- */
 
 .container,
@@ -1833,7 +1849,7 @@ img {
    ============================================================ */
 
 .about {
-  background: var(--bg-soft);
+  background: rgba(16, 16, 20, 0.3);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
@@ -2035,4 +2051,410 @@ img {
   .contact-label {
     min-width: 0;
   }
+}
+
+/* ============================================================
+   liquid glass — frosted panes that let the rays glow through
+   ============================================================ */
+
+:root {
+  --glass-tint: rgba(14, 15, 18, 0.46);
+  --glass-sheen: linear-gradient(160deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.018) 38%, rgba(255, 255, 255, 0.01) 70%, rgba(200, 245, 73, 0.025));
+  --glass-blur: blur(14px) saturate(1.4);
+  --glass-rim: linear-gradient(150deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.06) 30%, rgba(255, 255, 255, 0.03) 65%, rgba(200, 245, 73, 0.22));
+  --glass-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.03),
+    0 30px 70px -30px rgba(0, 0, 0, 0.75);
+}
+
+.project-media,
+.project-info,
+.about-lead,
+.about-facts,
+.contact-links,
+.nav-cta,
+.btn-ghost,
+.project-tags li,
+.hero-eyebrow,
+.section-eyebrow {
+  position: relative;
+  background: var(--glass-sheen), var(--glass-tint);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border-color: transparent;
+  box-shadow: var(--glass-shadow);
+}
+
+/* gradient rim — brighter on the lit top-left edge */
+.project-media::before,
+.project-info::before,
+.about-lead::before,
+.about-facts::before,
+.contact-links::before,
+.nav-cta::before,
+.btn-ghost::before,
+.project-tags li::before,
+.hero-eyebrow::before,
+.section-eyebrow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--glass-rim);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+
+.project-media:hover {
+  border-color: transparent;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 0 0 1px rgba(200, 245, 73, 0.12),
+    0 40px 80px -30px rgba(0, 0, 0, 0.8);
+}
+
+/* the board inside each card turns into a smoked pane over the frosted glass */
+.media-board {
+  background:
+    radial-gradient(420px 300px at 80% 10%, rgba(124, 108, 255, 0.18), transparent 70%),
+    radial-gradient(360px 260px at 10% 95%, rgba(200, 245, 73, 0.08), transparent 70%),
+    rgba(8, 8, 12, 0.62);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.about-facts,
+.contact-links {
+  border-radius: 22px;
+  padding: 8px 28px;
+}
+
+.fact:first-child,
+.contact-row:first-child {
+  border-top: none;
+}
+
+.fact:last-child,
+.contact-row:last-child {
+  border-bottom: none;
+}
+
+.nav-cta:hover,
+.btn-ghost:hover {
+  background: var(--glass-sheen), rgba(244, 242, 238, 0.12);
+  color: var(--ink);
+}
+
+.nav-scrolled {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01)), rgba(10, 10, 12, 0.5);
+  -webkit-backdrop-filter: blur(14px) saturate(1.5);
+  backdrop-filter: blur(14px) saturate(1.5);
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.about {
+  background: transparent;
+}
+
+/* widget cards — every block of content sits on its own glass pane */
+.project-media,
+.project-info,
+.about-lead,
+.about-facts,
+.contact-links {
+  border-radius: 22px;
+}
+
+.project-info,
+.about-lead {
+  padding: clamp(26px, 3vw, 40px);
+}
+
+.about-facts,
+.contact-links {
+  padding: 8px clamp(22px, 3vw, 34px);
+}
+
+/* labels become small glass pills with a status dot */
+.hero-eyebrow,
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: auto;
+  padding: 7px 16px 7px 12px;
+  border-radius: 100px;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+}
+
+.section-eyebrow::after {
+  content: "";
+  order: -1;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px rgba(200, 245, 73, 0.7);
+}
+
+.section-head > .section-eyebrow {
+  margin-bottom: 22px;
+}
+
+/* content comes into focus as you scroll down to it */
+[data-reveal] {
+  filter: blur(8px);
+  transition:
+    opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--d, 0s);
+}
+
+[data-reveal].is-visible {
+  filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    filter: none;
+  }
+}
+
+/* ============================================================
+   lively widgets (scripts/lively.js)
+   ============================================================ */
+
+.lv-word {
+  white-space: nowrap;
+}
+
+.lv-type .lv-ch {
+  opacity: 0;
+}
+
+.lv-type .lv-ch.lv-in {
+  opacity: 1;
+}
+
+.lv-caret {
+  position: relative;
+  display: inline-block;
+  width: 0;
+  height: 0;
+}
+
+.lv-caret::before {
+  content: "";
+  position: absolute;
+  left: 0.03em;
+  top: -0.8em;
+  width: 0.07em;
+  height: 0.92em;
+  border-radius: 1px;
+  background: var(--accent);
+  box-shadow: 0 0 12px rgba(200, 245, 73, 0.7);
+}
+
+.lv-caret.lv-blink {
+  animation: lv-blink 0.45s steps(1) infinite;
+}
+
+@keyframes lv-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.lv-flow .lv-w {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(6px);
+  transform: translateY(0.5em);
+}
+
+.lv-flow.lv-on .lv-w {
+  opacity: 1;
+  filter: none;
+  transform: none;
+  transition: opacity 0.5s ease, filter 0.5s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--i) * var(--lv-step));
+}
+
+.lv-pop > li {
+  opacity: 0;
+  transform: translateY(8px) scale(0.92);
+}
+
+.lv-pop.lv-on > li {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition-delay: calc(var(--i) * 70ms);
+}
+
+.project-index {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+
+/* stat widgets in About */
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(14px, 2vw, 22px);
+  margin-top: clamp(28px, 4vw, 44px);
+}
+
+.stat {
+  position: relative;
+  padding: clamp(22px, 2.6vw, 32px);
+  border-radius: 22px;
+  background: var(--glass-sheen), var(--glass-tint);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow);
+}
+
+.stat::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--glass-rim);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+
+.stat-num {
+  display: block;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-num em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.stat-label {
+  display: block;
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--ink-dim);
+}
+
+.stat-bar {
+  display: block;
+  height: 4px;
+  margin-top: 18px;
+  border-radius: 4px;
+  background: rgba(244, 242, 238, 0.08);
+  overflow: hidden;
+}
+
+.stat-bar i {
+  display: block;
+  height: 100%;
+  width: var(--w);
+  border-radius: inherit;
+  background: linear-gradient(90deg, rgba(200, 245, 73, 0.4), var(--accent));
+  box-shadow: 0 0 12px rgba(200, 245, 73, 0.6);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+}
+
+.is-visible .stat-bar i {
+  transform: scaleX(1);
+}
+
+@media (max-width: 640px) {
+  .about-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stat-bar i {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* cursor tilt + glint on the glass widgets */
+.lv-tilt {
+  transform-style: preserve-3d;
+}
+
+.lv-tilt.is-tilting {
+  will-change: transform;
+}
+
+.lv-tilt.is-tilting {
+  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-4px);
+  transition: transform 0.18s ease-out, box-shadow 0.3s ease;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 0 0 1px rgba(200, 245, 73, 0.10),
+    0 40px 80px -30px rgba(0, 0, 0, 0.85);
+}
+
+.lv-tilt::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.10), rgba(200, 245, 73, 0.04) 30%, transparent 55%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.lv-tilt.is-tilting::after {
+  opacity: 1;
+}
+
+.lv-tilt .media-board {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lv-tilt.is-tilting .media-board {
+  transform: translate3d(calc(var(--px, 0) * -10px), calc(var(--py, 0) * -10px), 0);
+  transition: transform 0.18s ease-out;
+}
+
+/* ============================================================
+   smoothness
+   ============================================================ */
+
+/* the card scenes animate width/top/left; containing them keeps that work
+   inside the board instead of re-laying out the whole page every frame */
+.media-board {
+  contain: layout paint;
+}
+
+/* scenes off screen don't animate at all */
+.is-paused,
+.is-paused *,
+.is-paused *::before,
+.is-paused *::after {
+  animation-play-state: paused !important;
+}
+
+/* the river canvas and grain get their own compositor layers */
+.rays,
+.grain {
+  transform: translateZ(0);
 }

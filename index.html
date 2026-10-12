@@ -22,6 +22,7 @@
 
   <body>
     <div class="grain" aria-hidden="true"></div>
+    <canvas class="rays" aria-hidden="true"></canvas>
 
     <!-- ================= nav ================= -->
     <header class="nav" id="nav">
@@ -60,7 +61,9 @@
 
         <p class="hero-sub" data-reveal style="--d: 0.2s">
           Hello! I am Razvan, a Computer Science student at Babes-Bolyai University
-          and Software Engineer, with a passion for technology, coding, and competitions.
+          and Software Engineer with two internships behind me, where I put my skills
+          to work on real products. I have a passion for technology, coding, and
+          competitions.
         </p>
 
         <div class="hero-actions" data-reveal style="--d: 0.3s">
@@ -137,7 +140,9 @@
               client-server pair speaking a custom JSON socket protocol, and a
               Spring Boot REST API with JWT authentication and WebSocket live
               updates, consumed by a React web client. Persistence runs through
-              both plain JDBC and Hibernate over SQLite.
+              both plain JDBC and Hibernate over SQLite. HikariCP connection
+              pooling cut connection time about 70&times; under load (1.4s &rarr;
+              0.02s).
             </p>
             <ul class="project-tags">
               <li>Java</li>
@@ -145,6 +150,8 @@
               <li>React</li>
               <li>JavaFX</li>
               <li>WebSocket</li>
+              <li>Hibernate</li>
+              <li>gRPC</li>
             </ul>
             <a
               class="project-link"
@@ -183,7 +190,7 @@
               <a href="https://github.com/razvandusa/SocialNetwork" target="_blank" rel="noopener">Social-Network</a>
             </h3>
             <p class="project-desc">
-              A desktop social platform engineered in Java with a JavaFX
+              Lucky Link &mdash; a desktop social platform engineered in Java with a JavaFX
               interface. Friend requests, real-time messaging, and concurrent
               operations are handled through multithreading, all persisted in a
               PostgreSQL database.
@@ -193,6 +200,7 @@
               <li>JavaFX</li>
               <li>PostgreSQL</li>
               <li>Multithreading</li>
+              <li>JDBC</li>
             </ul>
             <a
               class="project-link"
@@ -231,12 +239,14 @@
               <a href="https://github.com/razvandusa/DisciplineManager" target="_blank" rel="noopener">Discipline-Manager</a>
             </h3>
             <p class="project-desc">
-              An academic management tool written in modern C++ for tracking
-              disciplines, grades, and performance across a semester — clean
-              object-oriented design applied to a real student workflow.
+              An academic management tool written in modern C++ with a Qt
+              interface for tracking disciplines, grades, and performance across
+              a semester — clean object-oriented design on a layered
+              architecture, applied to a real student workflow.
             </p>
             <ul class="project-tags">
               <li>C++</li>
+              <li>Qt</li>
               <li>OOP</li>
               <li>Desktop</li>
             </ul>
@@ -477,8 +487,9 @@
           <p class="about-lead" data-reveal>
             I am currently based in Cluj-Napoca,
             where I focus on writing code that is <strong>clean,
-            maintainable, and scalable</strong>. I enjoy building software 
-            that solves real-world problems.
+            maintainable, and scalable</strong>. During my internships I built
+            an insurance comparison platform and a helpdesk module for an ERP
+            system. I enjoy building software that solves real-world problems.
           </p>
 
           <dl class="about-facts" data-reveal style="--d: 0.15s">
@@ -491,6 +502,10 @@
               <dd>Computer Science</dd>
             </div>
             <div class="fact">
+              <dt>Experience</dt>
+              <dd>2 software internships</dd>
+            </div>
+            <div class="fact">
               <dt>Based in</dt>
               <dd>Cluj-Napoca, Romania</dd>
             </div>
@@ -499,6 +514,24 @@
               <dd>Java &middot; Python &middot; C++</dd>
             </div>
           </dl>
+        </div>
+
+        <div class="about-stats" data-reveal style="--d: 0.2s">
+          <div class="stat">
+            <span class="stat-num"><span data-count>6</span></span>
+            <span class="stat-label">Featured projects</span>
+            <span class="stat-bar" aria-hidden="true"><i style="--w: 60%"></i></span>
+          </div>
+          <div class="stat">
+            <span class="stat-num"><span data-count>11</span><em>+</em></span>
+            <span class="stat-label">Languages &amp; tools</span>
+            <span class="stat-bar" aria-hidden="true"><i style="--w: 85%"></i></span>
+          </div>
+          <div class="stat">
+            <span class="stat-num"><span data-count>5</span></span>
+            <span class="stat-label">Web vulnerabilities exploited &amp; patched</span>
+            <span class="stat-bar" aria-hidden="true"><i style="--w: 45%"></i></span>
+          </div>
         </div>
       </section>
 
@@ -571,6 +604,8 @@
       </div>
     </footer>
 
+    <script src="scripts/rays.js" defer></script>
+    <script src="scripts/lively.js" defer></script>
     <script>
       // Reveal-on-scroll
       const observer = new IntersectionObserver(
@@ -625,12 +660,21 @@
             if (y > h && Math.random() > 0.975) drops[i] = 0;
             drops[i] += 0.5;
           }
-          requestAnimationFrame(frame);
+          if (onScreen) requestAnimationFrame(frame);
         }
+        // only rain while the card is on screen
+        let onScreen = true;
         try {
           size();
           if (window.ResizeObserver) new ResizeObserver(size).observe(canvas);
           else window.addEventListener("resize", size);
+          if (window.IntersectionObserver) {
+            new IntersectionObserver(([e]) => {
+              const was = onScreen;
+              onScreen = e.isIntersecting;
+              if (onScreen && !was) requestAnimationFrame(frame);
+            }).observe(canvas);
+          }
           requestAnimationFrame(frame);
         } catch (e) {}
       })();
