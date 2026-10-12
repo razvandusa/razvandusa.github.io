@@ -4,9 +4,11 @@
 (function () {
   const canvas = document.querySelector(".rays");
   if (!canvas) return;
+  // plain, synchronized canvas: the low-latency "desynchronized" mode is
+  // presented at the wrong size by some Chromium browsers on macOS (e.g. Arc)
   const gl = canvas.getContext("webgl", {
     alpha: false, antialias: false, depth: false, stencil: false,
-    preserveDrawingBuffer: false, desynchronized: true, powerPreference: "high-performance",
+    preserveDrawingBuffer: false, powerPreference: "low-power",
   });
   if (!gl) { canvas.remove(); return; }
 

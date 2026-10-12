@@ -2452,9 +2452,3 @@ img {
 .is-paused *::after {
   animation-play-state: paused !important;
 }
-
-/* the river canvas and grain get their own compositor layers */
-.rays,
-.grain {
-  transform: translateZ(0);
-}
